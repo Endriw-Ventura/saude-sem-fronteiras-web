@@ -2,6 +2,7 @@
 'use client'
 
 import Logo from '@/components/ui/Logo'
+import { userService } from '@/service/service-user'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -11,8 +12,7 @@ export default function LoginPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log({ email, senha })
-    // Aqui entraria a lógica de autenticação
+    
   }
 
   return (

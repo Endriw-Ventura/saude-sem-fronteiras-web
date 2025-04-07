@@ -22,7 +22,7 @@ async function getUser(id: Number) {
 async function createUser(user: User){
     try{
         const response = await api.post("/User/", user);
-
+        return response;
     }catch(error){
         throw new Error("Falha ao criar usuário")
     }
@@ -31,7 +31,7 @@ async function createUser(user: User){
 async function deleteUser(id: Number){
     try{
         const response = await api.delete(`/User/${id}`);
-
+        return response;
     }catch(error){
         throw new Error("Falha ao criar usuário")
     }
@@ -40,7 +40,7 @@ async function deleteUser(id: Number){
 async function editUser(id: Number, user: User){
     try{
         const response = await api.put(`/User/${id}`, user);
-
+        return response;
     }catch(error){
         throw new Error("Falha ao criar usuário")
     }
