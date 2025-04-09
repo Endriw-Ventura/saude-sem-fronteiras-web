@@ -1,4 +1,4 @@
-import { Doctor } from "@/types/doctor";
+import Doctor from "@/types/doctor";
 import { api } from "./api";
 
 async function getDoctors() {
@@ -46,4 +46,4 @@ async function editDoctor(id: Number, doctor: Doctor){
     }
 }
 
-export const userService = { getDoctor, getDoctors, createDoctor, deleteDoctor, editDoctor };
+export const doctorService = { getDoctor, getDoctors, createDoctor, deleteDoctor, editDoctor };

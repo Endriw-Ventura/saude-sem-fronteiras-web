@@ -1,3 +1,3 @@
-export interface Doctor {
+export default interface Doctor {
   name: string
 }

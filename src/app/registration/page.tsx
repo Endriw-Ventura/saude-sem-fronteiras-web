@@ -1,21 +1,16 @@
 'use client'
 
+import User from '@/types/user';
 import { useState } from 'react'
 
-interface FormData {
-  name: string;
-  email: string;
-  address: string;
+interface formData {
+  user: User;
 }
 
 const MultiStepForm: React.FC = () => {
   const [step, setStep] = useState<number>(1);
 
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    address: '',
-  });
+  const [createUser, setCreateUser] = useState<User | null>(null);
 
   const nextStep = (): void => {
     setStep(step + 1);
@@ -26,23 +21,56 @@ const MultiStepForm: React.FC = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setCreateUser(null);
   };
 
   const renderStep = () => {
     switch (step) {
       case 1:
         return (
-          <div>
-            <h2>Step 1: Name</h2>
+          <div className='flex flex-col justify-center'>
+            <h2>Step 1: Basic Info</h2>
 
             <input
               type="text"
               name="name"
-              value={formData.name}
+              value={createUser?.name}
+              onChange={handleChange}
+              placeholder="Enter your name"
+              className="p-2 rounded bg-stone-500 border border-white text-white"
+            />
+
+            <input
+              type="text"
+              name="surname"
+              value={createUser?.surname}
+              onChange={handleChange}
+              placeholder="Enter your name"
+              className="p-2 rounded bg-stone-500 border border-white text-white"
+            />
+
+            <input
+              type="text"
+              name="cpf"
+              value={createUser?.cpf}
+              onChange={handleChange}
+              placeholder="Enter your name"
+              className="p-2 rounded bg-stone-500 border border-white text-white"
+            />
+
+            <input
+              type="email"
+              name="email"
+              value={createUser?.email}
+              onChange={handleChange}
+              placeholder="Enter your name"
+              className="p-2 rounded bg-stone-500 border border-white text-white"
+            />
+
+            <input
+              type="password"
+              name="password"
+              value={createUser?.password}
               onChange={handleChange}
               placeholder="Enter your name"
               className="p-2 rounded bg-stone-500 border border-white text-white"
@@ -56,13 +84,76 @@ const MultiStepForm: React.FC = () => {
         );
       case 2:
         return (
-          <div>
-            <h2>Step 2: Email</h2>
+          <div className='flex flex-col justify-center'>
+            <h2>Step 2: Address</h2>
 
             <input
-              type="email"
-              name="email"
-              value={formData.email}
+              type="text"
+              name="country"
+              value={createUser?.address.country}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              className="p-2 rounded bg-stone-500 border border-white text-white"
+            />
+
+            <input
+              type="text"
+              name="state"
+              value={createUser?.address.state}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              className="p-2 rounded bg-stone-500 border border-white text-white"
+            />
+
+            <input
+              type="text"
+              name="city"
+              value={createUser?.address.city}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              className="p-2 rounded bg-stone-500 border border-white text-white"
+            />
+
+            <input
+              type="text"
+              name="neighborhood"
+              value={createUser?.address.neighborhood}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              className="p-2 rounded bg-stone-500 border border-white text-white"
+            />
+
+            <input
+              type="text"
+              name="streetName"
+              value={createUser?.address.streetName}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              className="p-2 rounded bg-stone-500 border border-white text-white"
+            />
+
+            <input
+              type="number"
+              name="number"
+              value={createUser?.address.number}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              className="p-2 rounded bg-stone-500 border border-white text-white"
+            />
+
+            <input
+              type="text"
+              name="complement"
+              value={createUser?.address.complement}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              className="p-2 rounded bg-stone-500 border border-white text-white"
+            />
+
+             <input
+              type="number"
+              name="zipCode"
+              value={createUser?.address.zipCode}
               onChange={handleChange}
               placeholder="Enter your email"
               className="p-2 rounded bg-stone-500 border border-white text-white"
@@ -84,13 +175,67 @@ const MultiStepForm: React.FC = () => {
         );
       case 3:
         return (
-          <div>
-            <h2>Step 3: Address</h2>
+          <div className='flex flex-col justify-center'>
+            <h2>Step 3: Additional Info</h2>
 
             <input
               type="text"
-              name="address"
-              value={formData.address}
+              name="motherName"
+              value={createUser?.userInfo.motherName}
+              onChange={handleChange}
+              placeholder="Enter your address"
+              className="p-2 rounded bg-stone-500 border border-white text-white"
+            />
+
+            <input
+              type="text"
+              name="bloodType"
+              value={createUser?.userInfo.bloodType}
+              onChange={handleChange}
+              placeholder="Enter your address"
+              className="p-2 rounded bg-stone-500 border border-white text-white"
+            />
+            
+            <input
+              type="text"
+              name="allergies"
+              value={createUser?.userInfo.allergies}
+              onChange={handleChange}
+              placeholder="Enter your address"
+              className="p-2 rounded bg-stone-500 border border-white text-white"
+            />
+
+            <input
+              type="checkbox"
+              name="previousCirurgies"
+              checked={createUser?.userInfo.previousCirurgies}
+              onChange={handleChange}
+              placeholder="Enter your address"
+              className="p-2 rounded bg-stone-500 border border-white text-white"
+            />
+
+              <input
+              type="text"
+              name="cirurgies"
+              value={createUser?.userInfo.cirurgies}
+              onChange={handleChange}
+              placeholder="Enter your address"
+              className="p-2 rounded bg-stone-500 border border-white text-white"
+            />
+
+            <input
+              type="text"
+              name="medications"
+              value={createUser?.userInfo.medications}
+              onChange={handleChange}
+              placeholder="Enter your address"
+              className="p-2 rounded bg-stone-500 border border-white text-white"
+            />
+
+            <input
+              type="text"
+              name="medicalCondition"
+              value={createUser?.userInfo.medicalCondition}
               onChange={handleChange}
               placeholder="Enter your address"
               className="p-2 rounded bg-stone-500 border border-white text-white"
@@ -112,11 +257,11 @@ const MultiStepForm: React.FC = () => {
         );
       case 4:
         return (
-          <div>
+          <div className='flex flex-col justify-center'>
             <h2>Form Submitted</h2>
-            <p>Name: {formData.name}</p>
-            <p>Email: {formData.email}</p>
-            <p>Address: {formData.address}</p>
+            <p>Name: {createUser?.name}</p>
+            <p>Email: {createUser?.email}</p>
+            <p>Address: {createUser?.address.city}</p>
           </div>
         );
       default:
