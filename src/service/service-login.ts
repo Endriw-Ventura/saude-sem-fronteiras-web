@@ -1,18 +1,18 @@
 import { api } from "./api";
 import router from "next/router";
 import { useUser } from "@/hooks/useUser";
-  
+
 const { setUser } = useUser();
 
 async function doLogin(email: string, password: string) {
   try {
-    const { data } = await api.post('/Login/', {
+    const { data } = await api.post("/Login/", {
       email,
-      password
+      password,
     });
 
     const token = data.token;
-    localStorage.setItem('saudeToken', token);
+    localStorage.setItem("saudeToken", token);
     setUser(data);
     return data;
   } catch (error) {
@@ -22,7 +22,7 @@ async function doLogin(email: string, password: string) {
 
 async function doLogout() {
   try {
-   localStorage.removeItem("token");
+    localStorage.removeItem("saudeToken");
     setUser(null);
     router.push("/login");
   } catch (error) {

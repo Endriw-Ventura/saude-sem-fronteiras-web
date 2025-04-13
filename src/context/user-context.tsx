@@ -1,3 +1,5 @@
+'use client'
+
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
 
 interface User {
