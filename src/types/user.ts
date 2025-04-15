@@ -1,7 +1,7 @@
 import Address from "./address";
 import UserInfo from "./userInfo";
 
-export default interface User {
+export interface User {
   name: string;
   surname: string;
   cpf: string;
@@ -10,3 +10,30 @@ export default interface User {
   userInfo: UserInfo;
   address: Address;
 }
+
+export const defaultUser: User = {
+  name: "",
+  surname: "",
+  cpf: "",
+  email: "",
+  password: "",
+  userInfo: {
+    motherName: "",
+    bloodType: "",
+    allergies: [""],
+    previousCirurgies: false,
+    cirurgies: [""],
+    medications: [""],
+    medicalCondition: "",
+  },
+  address: {
+    country: "",
+    state: "",
+    city: "",
+    neighborhood: "",
+    streetName: "",
+    number: "",
+    complement: "",
+    zipCode: "",
+  },
+};

@@ -5,55 +5,18 @@ import Specialty from "@/types/specialty";
 import { specialtyService } from "@/service/service-specialty";
 import { useEffect, useState } from "react";
 import CustomSelect from "@/components/ui/CustomSelect";
-
-interface formData {
-  name: "";
-  surname: "";
-  crm: "";
-  password: "";
-  initialHour: "";
-  finalHour: "";
-  specialtyId: 0;
-  price: "";
-  weekDays: {
-    sunday: boolean;
-    monday: boolean;
-    tuesday: boolean;
-    wednesday: boolean;
-    thursday: boolean;
-    friday: boolean;
-    saturday: boolean;
-  };
-}
-
-const defaultDoctor: formData = {
-  name: "",
-  surname: "",
-  crm: "",
-  password: "",
-  initialHour: "",
-  finalHour: "",
-  specialtyId: 0,
-  price: "",
-  weekDays: {
-    sunday: false,
-    monday: false,
-    tuesday: false,
-    wednesday: false,
-    thursday: false,
-    friday: false,
-    saturday: false,
-  },
-};
+import { doctorService } from "@/service/service-doctor";
+import { Doctor, defaultDoctor } from "@/types/doctor";
+import WeekdaysCheckbox from "@/components/doctor-registration/weekdays-checkbox";
 
 export default function DoctorRegistrationForm() {
-  const [createDoctor, setCreateDoctor] = useState<formData>(defaultDoctor);
+  const [createDoctor, setCreateDoctor] = useState<Doctor>(defaultDoctor);
   const [options, setOptions] = useState<Specialty[]>([]);
   const [selected, setSelected] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ createDoctor });
+    doctorService.createDoctor(createDoctor);
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,8 +24,8 @@ export default function DoctorRegistrationForm() {
 
     setCreateDoctor((prev) => {
       const updatedDoctor = { ...prev };
-      updatedDoctor.weekDays = {
-        ...updatedDoctor.weekDays,
+      updatedDoctor.WeekdaysDTO = {
+        ...updatedDoctor.WeekdaysDTO,
         [name]: checked,
       };
 
@@ -120,7 +83,7 @@ export default function DoctorRegistrationForm() {
         <CustomInput
           type="text"
           name="surname"
-          value={createDoctor.surname}
+          value={createDoctor.name}
           placeholder="Enter your surname"
           changeHandler={handleInputChange}
         />
@@ -169,62 +132,15 @@ export default function DoctorRegistrationForm() {
           />
         </label>
 
-        <div className="grid grid-cols-7 gap-2 text-center font-semibold text-sm">
-          <div>D</div>
-          <div>S</div>
-          <div>T</div>
-          <div>Q</div>
-          <div>Q</div>
-          <div>S</div>
-          <div>S</div>
-          <input
-            checked={createDoctor.weekDays.sunday}
-            name="sunday"
-            type="checkbox"
-            onChange={handleCheckboxChange}
-          />
-          <input
-            checked={createDoctor.weekDays.monday}
-            name="monday"
-            type="checkbox"
-            onChange={handleCheckboxChange}
-          />
-          <input
-            checked={createDoctor.weekDays.tuesday}
-            name="tuesday"
-            type="checkbox"
-            onChange={handleCheckboxChange}
-          />
-          <input
-            checked={createDoctor.weekDays.wednesday}
-            name="wednesday"
-            type="checkbox"
-            onChange={handleCheckboxChange}
-          />
-          <input
-            checked={createDoctor.weekDays.thursday}
-            name="thursday"
-            type="checkbox"
-            onChange={handleCheckboxChange}
-          />
-          <input
-            checked={createDoctor.weekDays.friday}
-            name="friday"
-            type="checkbox"
-            onChange={handleCheckboxChange}
-          />
-          <input
-            checked={createDoctor.weekDays.saturday}
-            name="saturday"
-            type="checkbox"
-            onChange={handleCheckboxChange}
-          />
-        </div>
+        <WeekdaysCheckbox
+          handleCheckboxChange={handleCheckboxChange}
+          createDoctor={createDoctor}
+        />
 
         <CustomInput
           type="number"
           name="price"
-          value={createDoctor.price}
+          value={createDoctor.price.toString()}
           placeholder="Enter your price per event"
           changeHandler={handleInputChange}
         />

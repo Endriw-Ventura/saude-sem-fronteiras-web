@@ -1,4 +1,4 @@
-import Doctor from "@/types/doctor";
+import { Doctor } from "@/types/doctor";
 import { api } from "./api";
 
 async function getDoctors() {
@@ -15,35 +15,38 @@ async function getDoctor(id: Number) {
     const { data } = await api.get(`/Doctor/${id}`);
     return data;
   } catch (error) {
-    throw new Error("Falha ao buscar usuários");
+    throw new Error("Falha ao buscar médicos");
   }
 }
 
-async function createDoctor(user: Doctor){
-    try{
-        const response = await api.post("/Doctor/", user);
-
-    }catch(error){
-        throw new Error("Falha ao criar usuário")
-    }
+async function createDoctor(doctor: Doctor) {
+  try {
+    const response = await api.post("/Doctor/", doctor);
+  } catch (error) {
+    throw new Error("Falha ao criar médico");
+  }
 }
 
-async function deleteDoctor(id: Number){
-    try{
-        const response = await api.delete(`/Doctor/${id}`);
-
-    }catch(error){
-        throw new Error("Falha ao criar usuário")
-    }
+async function deleteDoctor(id: Number) {
+  try {
+    const response = await api.delete(`/Doctor/${id}`);
+  } catch (error) {
+    throw new Error("Falha ao deletar médico");
+  }
 }
 
-async function editDoctor(id: Number, doctor: Doctor){
-    try{
-        const response = await api.put(`/Doctor/${id}`, doctor);
-
-    }catch(error){
-        throw new Error("Falha ao criar usuário")
-    }
+async function editDoctor(id: Number, doctor: Doctor) {
+  try {
+    const response = await api.put(`/Doctor/${id}`, doctor);
+  } catch (error) {
+    throw new Error("Falha ao editar médico");
+  }
 }
 
-export const doctorService = { getDoctor, getDoctors, createDoctor, deleteDoctor, editDoctor };
+export const doctorService = {
+  getDoctor,
+  getDoctors,
+  createDoctor,
+  deleteDoctor,
+  editDoctor,
+};
