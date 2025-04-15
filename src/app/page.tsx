@@ -1,15 +1,29 @@
 "use client";
 
 import Logo from "@/components/ui/Logo";
+import { useUser } from "@/hooks/useUser";
+import { loginService } from "@/service/service-login";
+import { LoggedUser } from "@/types/logged-use";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function LoginPage() {
+  const { setLoggedUser } = useUser();
   const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const data = loginService.doLogin(email, password);
+
+    const parsedData: LoggedUser = {
+      email: "",
+      name: "",
+      role: "",
+    };
+
+    setLoggedUser(parsedData);
+    console.log(data);
   };
 
   return (
@@ -30,8 +44,8 @@ export default function LoginPage() {
         <input
           type="password"
           placeholder="Senha"
-          value={senha}
-          onChange={(e) => setSenha(e.target.value)}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           className="p-2 rounded bg-stone-500 border border-white text-white"
         />
 

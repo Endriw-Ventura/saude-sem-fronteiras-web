@@ -1,29 +1,30 @@
-'use client'
+"use client";
 
-import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
-
-interface User {
-    name: string
-}
+import { LoggedUser } from "@/types/logged-use";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useState,
+} from "react";
 
 interface ProviderProps {
-    children: ReactNode
+  children: ReactNode;
 }
 
 interface UserContextProps {
-  loggedUser: User | null;
-  setUser: Dispatch<SetStateAction<User | null>>
+  loggedUser: LoggedUser | null;
+  setLoggedUser: Dispatch<SetStateAction<LoggedUser | null>>;
 }
 
 export const UserContext = createContext<UserContextProps | null>(null);
 export const UserProvider = ({ children }: ProviderProps) => {
-    const [user, setUser] = useState<User | null>(null)
+  const [loggedUser, setLoggedUser] = useState<LoggedUser | null>(null);
 
-    return (
-        <UserContext.Provider value={{ loggedUser: user, setUser }}>
-            {children}
-        </UserContext.Provider>
-    )
-}
-
-
+  return (
+    <UserContext.Provider value={{ loggedUser, setLoggedUser }}>
+      {children}
+    </UserContext.Provider>
+  );
+};

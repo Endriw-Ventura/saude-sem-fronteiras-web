@@ -1,4 +1,3 @@
-import Specialty from "@/types/specialty";
 import { api } from "./api";
 
 async function getSpecialties() {
