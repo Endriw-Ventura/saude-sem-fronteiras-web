@@ -8,7 +8,7 @@ async function doLogin(email: string, password: string) {
       password,
     });
 
-    const token = data.token;
+    const { token } = data;
     localStorage.setItem("saudeToken", token);
     return data;
   } catch (error) {

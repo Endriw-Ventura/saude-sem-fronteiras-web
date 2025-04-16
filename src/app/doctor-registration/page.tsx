@@ -96,6 +96,14 @@ export default function DoctorRegistrationForm() {
           changeHandler={handleInputChange}
         />
 
+        <CustomInput
+          type="email"
+          name="email"
+          value={createDoctor.email}
+          placeholder="Enter your email"
+          changeHandler={handleInputChange}
+        />
+
         <CustomSelect
           itemList={options}
           value={selected}

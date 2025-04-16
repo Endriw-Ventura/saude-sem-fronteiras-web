@@ -3,6 +3,7 @@ export interface Doctor {
   surname: string;
   crm: string;
   password: string;
+  email: string;
   initialHour: string;
   finalHour: string;
   specialtyId: Number;
@@ -23,6 +24,7 @@ export const defaultDoctor: Doctor = {
   surname: "",
   crm: "",
   password: "",
+  email: "",
   initialHour: "",
   finalHour: "",
   specialtyId: 0,

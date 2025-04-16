@@ -1,6 +1,6 @@
 "use client";
 
-import { LoggedUser } from "@/types/logged-use";
+import { LoggedUser } from "@/types/logged-user";
 import {
   createContext,
   Dispatch,

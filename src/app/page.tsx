@@ -3,7 +3,7 @@
 import Logo from "@/components/ui/Logo";
 import { useUser } from "@/hooks/useUser";
 import { loginService } from "@/service/service-login";
-import { LoggedUser } from "@/types/logged-use";
+import { LoggedUser } from "@/types/logged-user";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -12,18 +12,11 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const data = loginService.doLogin(email, password);
-
-    const parsedData: LoggedUser = {
-      email: "",
-      name: "",
-      role: "",
-    };
-
+    const data = await loginService.doLogin(email, password);
+    const parsedData: LoggedUser = { ...data };
     setLoggedUser(parsedData);
-    console.log(data);
   };
 
   return (
