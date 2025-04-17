@@ -1,6 +1,7 @@
 "use client";
 
 import Logo from "@/components/ui/Logo";
+import { useRouter } from "next/navigation";
 import { useUser } from "@/hooks/useUser";
 import { loginService } from "@/service/service-login";
 import { LoggedUser } from "@/types/logged-user";
@@ -8,6 +9,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function LoginPage() {
+  const router = useRouter();
   const { setLoggedUser } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,6 +19,7 @@ export default function LoginPage() {
     const data = await loginService.doLogin(email, password);
     const parsedData: LoggedUser = { ...data };
     setLoggedUser(parsedData);
+    router.push("/home");
   };
 
   return (
@@ -53,14 +56,14 @@ export default function LoginPage() {
           href="/registration"
           className="p-2 bg-[#272727] border border-white rounded text-center hover:bg-stone-400 text-white font-bold"
         >
-          <button type="button">Cadastrar</button>
+          <button>Cadastrar</button>
         </Link>
 
         <Link
           href="/recover"
           className="p-2 bg-[#272727] border border-white rounded text-center hover:bg-stone-400 text-white font-bold"
         >
-          <button type="button">Esqueci minha senha</button>
+          <button>Esqueci minha senha</button>
         </Link>
       </form>
     </main>
