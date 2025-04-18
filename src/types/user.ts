@@ -11,6 +11,14 @@ export interface User {
   address: Address;
 }
 
+export interface SimpleUser {
+  id: Number;
+  name: string;
+  surname: string;
+  cpf: string;
+  email: string;
+}
+
 export const defaultUser: User = {
   name: "",
   surname: "",

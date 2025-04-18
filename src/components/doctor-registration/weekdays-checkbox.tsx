@@ -1,4 +1,4 @@
-import Doctor from "@/types/doctor";
+import { Doctor } from "@/types/doctor";
 
 interface componentProps {
   createDoctor: Doctor;

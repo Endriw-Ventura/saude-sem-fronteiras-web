@@ -1,6 +1,6 @@
 import { User } from "@/types/user";
-import CustomInput from "../ui/CustomInput";
-import CustomButton from "../ui/CustomButton";
+import CustomInput from "../ui/custom-input";
+import CustomButton from "../ui/custom-button";
 
 interface multiStepFormTwoProps {
   createUser: User;

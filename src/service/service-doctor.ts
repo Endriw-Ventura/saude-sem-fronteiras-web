@@ -1,4 +1,4 @@
-import { Doctor } from "@/types/doctor";
+import { Doctor, SimpleDoctor } from "@/types/doctor";
 import { api } from "./api";
 
 async function getDoctors() {
@@ -7,6 +7,20 @@ async function getDoctors() {
     return data;
   } catch (error) {
     throw new Error("Falha ao buscar usuário");
+  }
+}
+
+async function getAvailableDoctors(
+  idSpecialty: Number,
+  moment: string
+): Promise<SimpleDoctor[]> {
+  try {
+    const { data } = await api.get(
+      `/Doctor/specialty?idSpecialty=${idSpecialty}&moment=${moment}`
+    );
+    return data;
+  } catch (error) {
+    throw new Error("Falha ao buscar médicos");
   }
 }
 
@@ -37,7 +51,7 @@ async function deleteDoctor(id: Number) {
 
 async function editDoctor(id: Number, doctor: Doctor) {
   try {
-    const response = await api.put(`/Doctor/${id}`, doctor);
+    const response = await api.put(`/Doctor/speciality/${id}`, doctor);
   } catch (error) {
     throw new Error("Falha ao editar médico");
   }
@@ -46,6 +60,7 @@ async function editDoctor(id: Number, doctor: Doctor) {
 export const doctorService = {
   getDoctor,
   getDoctors,
+  getAvailableDoctors,
   createDoctor,
   deleteDoctor,
   editDoctor,

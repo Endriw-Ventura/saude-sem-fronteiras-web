@@ -1,7 +1,7 @@
 "use client";
 
-import CustomButton from "@/components/ui/CustomButton";
-import CustomInput from "@/components/ui/CustomInput";
+import CustomButton from "@/components/ui/custom-button";
+import CustomInput from "@/components/ui/custom-input";
 
 export default function RecoverPage() {
   return (

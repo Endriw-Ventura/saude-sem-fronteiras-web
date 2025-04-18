@@ -19,6 +19,13 @@ export interface Doctor {
   };
 }
 
+export interface SimpleDoctor {
+  id: Number;
+  name: string;
+  surname: string;
+  email: string;
+}
+
 export const defaultDoctor: Doctor = {
   name: "",
   surname: "",

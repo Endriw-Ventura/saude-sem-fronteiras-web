@@ -1,6 +1,6 @@
 "use client";
 
-import Logo from "@/components/ui/Logo";
+import Logo from "@/components/ui/logo";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/hooks/useUser";
 import { loginService } from "@/service/service-login";

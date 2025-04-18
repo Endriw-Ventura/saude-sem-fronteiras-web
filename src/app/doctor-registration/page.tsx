@@ -1,10 +1,10 @@
 "use client";
 
-import CustomInput from "@/components/ui/CustomInput";
-import Specialty from "@/types/specialty";
+import CustomInput from "@/components/ui/custom-input";
+import { Specialty } from "@/types/specialty";
 import { specialtyService } from "@/service/service-specialty";
 import { useEffect, useState } from "react";
-import CustomSelect from "@/components/ui/CustomSelect";
+import CustomSelect from "@/components/ui/custom-select";
 import { doctorService } from "@/service/service-doctor";
 import { Doctor, defaultDoctor } from "@/types/doctor";
 import WeekdaysCheckbox from "@/components/doctor-registration/weekdays-checkbox";
@@ -12,7 +12,7 @@ import WeekdaysCheckbox from "@/components/doctor-registration/weekdays-checkbox
 export default function DoctorRegistrationForm() {
   const [createDoctor, setCreateDoctor] = useState<Doctor>(defaultDoctor);
   const [options, setOptions] = useState<Specialty[]>([]);
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState<Specialty | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,15 +22,13 @@ export default function DoctorRegistrationForm() {
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
 
-    setCreateDoctor((prev) => {
-      const updatedDoctor = { ...prev };
-      updatedDoctor.WeekdaysDTO = {
-        ...updatedDoctor.WeekdaysDTO,
+    setCreateDoctor((prev) => ({
+      ...prev,
+      WeekdaysDTO: {
+        ...prev.WeekdaysDTO,
         [name]: checked,
-      };
-
-      return updatedDoctor;
-    });
+      },
+    }));
   };
 
   const handleInputChange = (
@@ -45,12 +43,11 @@ export default function DoctorRegistrationForm() {
     }));
   };
 
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setSelected(value);
+  const handleSpecialtyChange = (specialty: Specialty) => {
+    setSelected(specialty);
     setCreateDoctor((prev) => ({
       ...prev,
-      [name]: value,
+      specialtyId: specialty.id,
     }));
   };
 
@@ -59,6 +56,11 @@ export default function DoctorRegistrationForm() {
       try {
         const response = await specialtyService.getSpecialties();
         setOptions(response);
+        setSelected(response[0]);
+        setCreateDoctor((prev) => ({
+          ...prev,
+          specialtyId: response[0].id,
+        }));
       } catch (error) {
         console.error("Erro ao buscar os itens:", error);
       }
@@ -106,8 +108,9 @@ export default function DoctorRegistrationForm() {
 
         <CustomSelect
           itemList={options}
-          value={selected}
-          handleOnChange={handleSelectChange}
+          value={selected!}
+          handleOnChange={handleSpecialtyChange}
+          getLabel={(s) => s.name}
         />
 
         <CustomInput
@@ -136,7 +139,7 @@ export default function DoctorRegistrationForm() {
             name="finalHour"
             changeHandler={handleInputChange}
             value={createDoctor.finalHour}
-            placeholder="Enter you ending hour"
+            placeholder="Enter your ending hour"
           />
         </label>
 
