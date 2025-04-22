@@ -1,9 +1,9 @@
 "use client";
 
+import CustomMain from "@/components/ui/custom-main";
 import { useUser } from "@/hooks/useUser";
 import { consultService } from "@/service/service-consult";
-import { Consult, ConsultList } from "@/types/consult";
-import { time } from "console";
+import { ConsultList } from "@/types/consult";
 import { useEffect, useState } from "react";
 
 export default function EventsPage() {
@@ -37,10 +37,10 @@ export default function EventsPage() {
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center justify-items-center w-full">
+      <CustomMain>
         <h1>Suas consultas</h1>
         {consults.length > 0 ? (
-          consults.map((consult: ConsultList, index) => {
+          consults.map((consult: ConsultList) => {
             const { pacient, doctor, moment, id } = consult;
             const dateTime = moment.split("T");
             const date = dateTime[0];
@@ -87,7 +87,7 @@ export default function EventsPage() {
         ) : (
           <p>Sem consultas marcadas</p>
         )}
-      </main>
+      </CustomMain>
     </div>
   );
 }

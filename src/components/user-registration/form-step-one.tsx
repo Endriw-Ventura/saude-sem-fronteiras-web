@@ -51,7 +51,7 @@ export default function UserFormStepOne({
         placeholder="Enter your password"
         changeHandler={handleInputChange}
       />
-      <CustomButton text={"Next"} clickHandler={handleNextStep} />
+      <CustomButton clickHandler={handleNextStep}>Next</CustomButton>
     </div>
   );
 }

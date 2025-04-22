@@ -1,5 +1,9 @@
 "use client";
 
+import CustomButton from "@/components/ui/custom-button";
+import CustomForm from "@/components/ui/custom-form";
+import CustomInput from "@/components/ui/custom-input";
+import CustomMain from "@/components/ui/custom-main";
 import CustomSelect from "@/components/ui/custom-select";
 import { useUser } from "@/hooks/useUser";
 import { consultService } from "@/service/service-consult";
@@ -20,6 +24,7 @@ export default function SchedulePage() {
   const router = useRouter();
   const [selectedSpeciality, setSelectedSpeciality] =
     useState<Specialty | null>(null);
+
   const [selectedDoctor, setSelectedDoctor] = useState<SimpleDoctor | null>(
     null
   );
@@ -54,13 +59,13 @@ export default function SchedulePage() {
     fetchDoctors();
   }, [selectedSpeciality, selectedDate, selectedTime]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    consultService.createConsult({
+  const handleSubmit = async (e: React.FormEvent) => {
+    const response = await consultService.createConsult({
       idDoctor: selectedDoctor!.id.toString(),
       idPacient: loggedUser!.id.toString(),
       moment: transformDateTime(selectedDate, selectedTime),
     });
+
     router.push("/events");
   };
 
@@ -71,32 +76,29 @@ export default function SchedulePage() {
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center justify-items-center">
-        <form
-          className="flex flex-col gap-[32px] row-start-2 items-center justify-items-center"
-          onSubmit={handleSubmit}
-        >
+      <CustomMain>
+        <CustomForm submitHandler={handleSubmit}>
           <CustomSelect
             itemList={specialities}
             value={selectedSpeciality}
             handleOnChange={setSelectedSpeciality}
             getLabel={(p) => p!.name}
           />
-          <input
-            className="p-2 rounded bg-stone-500 border border-white text-stone-300"
+          <CustomInput
             placeholder="Enter the date"
+            name="date"
             value={selectedDate}
             required
             type="date"
-            onChange={(e) => setSelectedDate(e.target.value)}
+            changeHandler={(e) => setSelectedDate(e.target.value)}
           />
-          <input
-            className="p-2 rounded bg-stone-500 border border-white text-stone-300"
+          <CustomInput
             placeholder="Enter the time"
+            name="time"
             value={selectedTime}
             required
             type="time"
-            onChange={(e) => setSelectedTime(e.target.value)}
+            changeHandler={(e) => setSelectedTime(e.target.value)}
           />
 
           {selectedSpeciality &&
@@ -113,20 +115,15 @@ export default function SchedulePage() {
               {selectedDoctor && (
                 <>
                   <p>{`Preço: R$ ${selectedDoctor.price}`}</p>
-                  <button
-                    className="p-2 bg-[#272727] border border-white rounded hover:bg-stone-400 text-white font-bold"
-                    type="submit"
-                  >
-                    Agendar
-                  </button>
+                  <CustomButton type="submit">Agendar</CustomButton>
                 </>
               )}
             </>
           ) : (
             <p>Não há médicos disponiveis neste dia/horário</p>
           )}
-        </form>
-      </main>
+        </CustomForm>
+      </CustomMain>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 "use client";
+import CustomMain from "@/components/ui/custom-main";
 import UserFormConfirmation from "@/components/user-registration/form-step-confirmation";
 import UserFormStepOne from "@/components/user-registration/form-step-one";
 import UserFormStepThree from "@/components/user-registration/form-step-three";
@@ -106,11 +107,7 @@ const MultiStepForm: React.FC = () => {
     }
   };
 
-  return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-4 bg-[#272727] text-white space-y-2">
-      {renderStep()}
-    </main>
-  );
+  return <CustomMain>{renderStep()}</CustomMain>;
 };
 
 export default MultiStepForm;

@@ -8,15 +8,18 @@ import CustomSelect from "@/components/ui/custom-select";
 import { doctorService } from "@/service/service-doctor";
 import { Doctor, defaultDoctor } from "@/types/doctor";
 import WeekdaysCheckbox from "@/components/doctor-registration/weekdays-checkbox";
+import CustomForm from "@/components/ui/custom-form";
+import CustomButton from "@/components/ui/custom-button";
+import CustomMain from "@/components/ui/custom-main";
 
 export default function DoctorRegistrationForm() {
   const [createDoctor, setCreateDoctor] = useState<Doctor>(defaultDoctor);
   const [options, setOptions] = useState<Specialty[]>([]);
   const [selected, setSelected] = useState<Specialty | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    doctorService.createDoctor(createDoctor);
+    const response = await doctorService.createDoctor(createDoctor);
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,11 +72,8 @@ export default function DoctorRegistrationForm() {
   }, []);
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-4 bg-[#272727] text-white space-y-2">
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col w-full max-w-sm space-y-4"
-      >
+    <CustomMain>
+      <CustomForm submitHandler={handleSubmit}>
         <CustomInput
           type="text"
           name="name"
@@ -155,13 +155,8 @@ export default function DoctorRegistrationForm() {
           placeholder="Enter your price per event"
           changeHandler={handleInputChange}
         />
-        <button
-          type="submit"
-          className="p-2 bg-[#272727] border border-white rounded hover:bg-stone-400 text-white font-bold"
-        >
-          Cadastrar
-        </button>
-      </form>
-    </main>
+        <CustomButton type="submit">Cadastrar</CustomButton>
+      </CustomForm>
+    </CustomMain>
   );
 }

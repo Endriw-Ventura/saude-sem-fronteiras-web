@@ -3,6 +3,7 @@ interface inputProps {
   name: string;
   value: string | number | string[] | undefined;
   placeholder: string;
+  required?: boolean;
   changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -11,10 +12,12 @@ export default function CustomInput({
   name,
   value,
   placeholder,
+  required,
   changeHandler,
 }: inputProps) {
   return (
     <input
+      required={required}
       type={type}
       name={name}
       value={value}

@@ -70,8 +70,8 @@ export default function UserFormStepThree({
         placeholder="Enter any medical condition"
         changeHandler={handleInputChange}
       />
-      <CustomButton text="Back" clickHandler={handlePreviousStep} />
-      <CustomButton text="Submit" clickHandler={handleNextStep} />
+      <CustomButton clickHandler={handlePreviousStep}>Back</CustomButton>
+      <CustomButton clickHandler={handleNextStep}>Submit</CustomButton>
     </div>
   );
 }

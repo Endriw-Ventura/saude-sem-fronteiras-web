@@ -5,8 +5,12 @@ import { useRouter } from "next/navigation";
 import { useUser } from "@/hooks/useUser";
 import { loginService } from "@/service/service-login";
 import { LoggedUser } from "@/types/logged-user";
-import Link from "next/link";
 import { useState } from "react";
+import CustomInput from "@/components/ui/custom-input";
+import CustomButton from "@/components/ui/custom-button";
+import NavButton from "@/components/ui/nav-button";
+import CustomForm from "@/components/ui/custom-form";
+import CustomMain from "@/components/ui/custom-main";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -15,7 +19,6 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
     const data = await loginService.doLogin(email, password);
     const parsedData: LoggedUser = { ...data };
     setLoggedUser(parsedData);
@@ -23,49 +26,27 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-4 bg-[#272727] text-white space-y-2">
+    <CustomMain>
       <Logo />
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col w-full max-w-sm space-y-4"
-      >
-        <input
+      <CustomForm submitHandler={handleSubmit}>
+        <CustomInput
           type="email"
-          placeholder="Email"
+          placeholder="Enter your email"
+          name="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="p-2 rounded bg-stone-500 border border-white text-white"
+          changeHandler={(e) => setEmail(e.target.value)}
         />
-
-        <input
+        <CustomInput
           type="password"
-          placeholder="Senha"
+          name="password"
+          placeholder="Enter your password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="p-2 rounded bg-stone-500 border border-white text-white"
+          changeHandler={(e) => setPassword(e.target.value)}
         />
-
-        <button
-          type="submit"
-          className="p-2 bg-[#272727] border border-white rounded hover:bg-stone-400 text-white font-bold"
-        >
-          Entrar
-        </button>
-
-        <Link
-          href="/registration"
-          className="p-2 bg-[#272727] border border-white rounded text-center hover:bg-stone-400 text-white font-bold"
-        >
-          <button>Cadastrar</button>
-        </Link>
-
-        <Link
-          href="/recover"
-          className="p-2 bg-[#272727] border border-white rounded text-center hover:bg-stone-400 text-white font-bold"
-        >
-          <button>Esqueci minha senha</button>
-        </Link>
-      </form>
-    </main>
+        <CustomButton type="submit">Entrar</CustomButton>
+        <NavButton route="/registration" buttonText="Cadastrar" />
+        <NavButton route="/recover" buttonText="Esqueci minha senha" />
+      </CustomForm>
+    </CustomMain>
   );
 }

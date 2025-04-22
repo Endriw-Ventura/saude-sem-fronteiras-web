@@ -36,8 +36,8 @@ export default function UserFormConfirmation({
       <p>Allergies: {createUser.userInfo.allergies}</p>
       <p>Medications: {createUser.userInfo.medications}</p>
       <p>Cirurgies: {createUser.userInfo.cirurgies}</p>
-      <CustomButton text={"Confirm"} clickHandler={handleConfirmation} />
-      <CustomButton text={"Go back"} clickHandler={handlePreviousStep} />
+      <CustomButton clickHandler={handleConfirmation}>Confirm</CustomButton>
+      <CustomButton clickHandler={handlePreviousStep}>Go back</CustomButton>
     </div>
   );
 }

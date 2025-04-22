@@ -74,8 +74,8 @@ export default function UserFormStepTwo({
         placeholder="Enter your zipCode"
         changeHandler={handleInputChange}
       />
-      <CustomButton text="Back" clickHandler={handlePreviousStep} />
-      <CustomButton text={"Next"} clickHandler={handleNextStep} />
+      <CustomButton clickHandler={handlePreviousStep}>Back</CustomButton>
+      <CustomButton clickHandler={handleNextStep}>Next</CustomButton>
     </div>
   );
 }
