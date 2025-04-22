@@ -24,6 +24,7 @@ export interface SimpleDoctor {
   name: string;
   surname: string;
   email: string;
+  price: Number;
 }
 
 export const defaultDoctor: Doctor = {

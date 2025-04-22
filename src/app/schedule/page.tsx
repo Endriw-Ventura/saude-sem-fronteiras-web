@@ -7,6 +7,7 @@ import { doctorService } from "@/service/service-doctor";
 import { specialtyService } from "@/service/service-specialty";
 import { SimpleDoctor } from "@/types/doctor";
 import { Specialty } from "@/types/specialty";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function SchedulePage() {
@@ -16,7 +17,7 @@ export default function SchedulePage() {
   const [doctors, setDoctors] = useState<SimpleDoctor[]>([]);
   const [selectedTime, setSelectedTime] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
-
+  const router = useRouter();
   const [selectedSpeciality, setSelectedSpeciality] =
     useState<Specialty | null>(null);
   const [selectedDoctor, setSelectedDoctor] = useState<SimpleDoctor | null>(
@@ -38,7 +39,7 @@ export default function SchedulePage() {
 
   useEffect(() => {
     const fetchDoctors = async () => {
-      if (!selectedSpeciality) return;
+      if (!selectedSpeciality || !selectedDate || !selectedTime) return;
       try {
         const response = await doctorService.getAvailableDoctors(
           selectedSpeciality.id,
@@ -56,10 +57,11 @@ export default function SchedulePage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     consultService.createConsult({
-      doctorId: selectedDoctor!.id.toString(),
-      userId: loggedUser!.id.toString(),
+      idDoctor: selectedDoctor!.id.toString(),
+      idPacient: loggedUser!.id.toString(),
       moment: transformDateTime(selectedDate, selectedTime),
     });
+    router.push("/events");
   };
 
   function transformDateTime(data: string, hora: string) {
@@ -96,18 +98,33 @@ export default function SchedulePage() {
             type="time"
             onChange={(e) => setSelectedTime(e.target.value)}
           />
-          <CustomSelect
-            itemList={doctors}
-            value={selectedDoctor}
-            handleOnChange={setSelectedDoctor}
-            getLabel={(d) => `Dr. ${d!.name} ${d!.surname}`}
-          />
-          <button
-            className="p-2 bg-[#272727] border border-white rounded hover:bg-stone-400 text-white font-bold"
-            type="submit"
-          >
-            Agendar
-          </button>
+
+          {selectedSpeciality &&
+          selectedDate &&
+          selectedTime &&
+          doctors.length > 0 ? (
+            <>
+              <CustomSelect
+                itemList={doctors}
+                value={selectedDoctor}
+                handleOnChange={setSelectedDoctor}
+                getLabel={(d) => `Dr. ${d!.name} ${d!.surname}`}
+              />
+              {selectedDoctor && (
+                <>
+                  <p>{`Preço: R$ ${selectedDoctor.price}`}</p>
+                  <button
+                    className="p-2 bg-[#272727] border border-white rounded hover:bg-stone-400 text-white font-bold"
+                    type="submit"
+                  >
+                    Agendar
+                  </button>
+                </>
+              )}
+            </>
+          ) : (
+            <p>Não há médicos disponiveis neste dia/horário</p>
+          )}
         </form>
       </main>
     </div>

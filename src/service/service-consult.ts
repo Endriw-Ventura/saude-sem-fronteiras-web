@@ -1,6 +1,6 @@
 import { Doctor } from "@/types/doctor";
 import { api } from "./api";
-import { Consult, SimpleConsult } from "@/types/consult";
+import { Consult, ConsultList, SimpleConsult } from "@/types/consult";
 
 async function getConsults(): Promise<Consult[]> {
   try {
@@ -11,7 +11,10 @@ async function getConsults(): Promise<Consult[]> {
   }
 }
 
-async function getUserConsults(id: Number, role: string): Promise<Consult[]> {
+async function getUserConsults(
+  id: Number,
+  role: string
+): Promise<ConsultList[]> {
   try {
     const { data } = await api.get(`/Event/${role}/${id}`);
     return data;

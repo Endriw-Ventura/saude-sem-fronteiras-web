@@ -2,14 +2,21 @@ import { SimpleDoctor } from "./doctor";
 import { SimpleUser } from "./user";
 
 export interface Consult {
-  user: SimpleUser;
+  pacient: SimpleUser;
   doctor: SimpleDoctor;
   time: string;
   date: string;
 }
 
 export interface SimpleConsult {
-  userId: string;
-  doctorId: string;
+  idPacient: string;
+  idDoctor: string;
+  moment: string;
+}
+
+export interface ConsultList {
+  id: Number;
+  pacient: SimpleUser;
+  doctor: SimpleDoctor;
   moment: string;
 }
