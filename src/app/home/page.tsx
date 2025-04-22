@@ -30,7 +30,12 @@ export default function HomePage() {
             <button>Agendar</button>
           </Link>
         ) : (
-          <></>
+          <Link
+            href={"/exam-schedule"}
+            className="p-2 bg-[#272727] border border-white rounded text-center hover:bg-stone-400 text-white font-bold"
+          >
+            <button>Marcar Exames</button>
+          </Link>
         )}
       </main>
     </div>

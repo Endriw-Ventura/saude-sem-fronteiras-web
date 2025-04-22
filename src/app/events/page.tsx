@@ -26,13 +26,19 @@ export default function EventsPage() {
     fetchItems();
   }, []);
 
-  const handleRemover = (id: Number) => {
-    console.log(id);
+  const handleRemover = async (id: Number) => {
+    try {
+      await consultService.deleteConsult(id);
+      setConsults((prev) => prev.filter((consult) => consult.id !== id));
+    } catch (error) {
+      console.error("Erro ao deletar consulta:", error);
+    }
   };
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center justify-items-center w-full">
+        <h1>Suas consultas</h1>
         {consults.length > 0 ? (
           consults.map((consult: ConsultList, index) => {
             const { pacient, doctor, moment, id } = consult;
