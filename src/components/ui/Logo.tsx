@@ -3,16 +3,15 @@ import React from "react";
 
 export default function Logo() {
   return (
-    <div className="bg-black p-[30px] mb-[30px]">
+    <div className="mb-0">
       <Image
         aria-hidden
-        src="/logo.jpg"
+        src="/logo.png"
         alt="Logo Icon"
-        className="w-full h-auto"
-        width={1200}
-        height={600}
+        className="w-auto h-auto"
+        width={420}
+        height={320}
       />
-      <h1>Saude Sem Fronteiras</h1>
     </div>
   );
 }
