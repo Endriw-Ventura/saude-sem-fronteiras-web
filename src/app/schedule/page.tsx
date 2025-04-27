@@ -78,6 +78,7 @@ export default function SchedulePage() {
     <CustomMain>
       <CustomForm submitHandler={handleSubmit}>
         <CustomSelect
+          label="Specialty"
           itemList={specialities}
           value={selectedSpeciality}
           handleOnChange={setSelectedSpeciality}
@@ -108,6 +109,7 @@ export default function SchedulePage() {
         doctors.length > 0 ? (
           <>
             <CustomSelect
+              label="Doctors"
               itemList={doctors}
               value={selectedDoctor}
               handleOnChange={setSelectedDoctor}
@@ -115,7 +117,7 @@ export default function SchedulePage() {
             />
             {selectedDoctor && (
               <>
-                <p>{`Preço: R$ ${selectedDoctor.price}`}</p>
+                <p>{`Price: R$ ${selectedDoctor.price}`}</p>
                 <CustomButton type="submit">Agendar</CustomButton>
               </>
             )}

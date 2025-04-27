@@ -11,15 +11,18 @@ import WeekdaysCheckbox from "@/components/doctor-registration/weekdays-checkbox
 import CustomForm from "@/components/ui/custom-form";
 import CustomButton from "@/components/ui/custom-button";
 import CustomMain from "@/components/ui/custom-main";
+import { useRouter } from "next/navigation";
 
 export default function DoctorRegistrationForm() {
   const [createDoctor, setCreateDoctor] = useState<Doctor>(defaultDoctor);
   const [options, setOptions] = useState<Specialty[]>([]);
   const [selected, setSelected] = useState<Specialty | null>(null);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const response = await doctorService.createDoctor(createDoctor);
+    router.push("/");
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,7 +90,7 @@ export default function DoctorRegistrationForm() {
           type="text"
           name="surname"
           label="Surname"
-          value={createDoctor.name}
+          value={createDoctor.surname}
           placeholder="Enter your surname"
           changeHandler={handleInputChange}
         />
@@ -113,6 +116,7 @@ export default function DoctorRegistrationForm() {
         <CustomSelect
           itemList={options}
           value={selected!}
+          label="Specialty"
           handleOnChange={handleSpecialtyChange}
           getLabel={(s) => s.name}
         />
@@ -126,29 +130,23 @@ export default function DoctorRegistrationForm() {
           changeHandler={handleInputChange}
         />
 
-        <label className="flex flex-col">
-          Initial Hour:
-          <CustomInput
-            type="time"
-            label="Initial Hour"
-            name="initialHour"
-            changeHandler={handleInputChange}
-            value={createDoctor.initialHour}
-            placeholder={"Enter your starting hour"}
-          />
-        </label>
+        <CustomInput
+          type="time"
+          label="Initial Hour"
+          name="initialHour"
+          changeHandler={handleInputChange}
+          value={createDoctor.initialHour}
+          placeholder={"Enter your starting hour"}
+        />
 
-        <label className="flex flex-col">
-          Final Hour:
-          <CustomInput
-            type="time"
-            label="Final Hour"
-            name="finalHour"
-            changeHandler={handleInputChange}
-            value={createDoctor.finalHour}
-            placeholder="Enter your ending hour"
-          />
-        </label>
+        <CustomInput
+          type="time"
+          label="Final Hour"
+          name="finalHour"
+          changeHandler={handleInputChange}
+          value={createDoctor.finalHour}
+          placeholder="Enter your ending hour"
+        />
 
         <WeekdaysCheckbox
           handleCheckboxChange={handleCheckboxChange}

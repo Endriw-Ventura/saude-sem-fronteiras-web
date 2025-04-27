@@ -8,7 +8,9 @@ export function middleware(request: NextRequest) {
 
   const isAuthPage =
     request.nextUrl.pathname === "/" ||
-    request.nextUrl.pathname.startsWith("/registration");
+    request.nextUrl.pathname.startsWith("/registration") ||
+    request.nextUrl.pathname.startsWith("/doctor-registration") ||
+    request.nextUrl.pathname.startsWith("/user-registration");
 
   if (!token && !isAuthPage) {
     const loginUrl = new URL("/", request.url);

@@ -6,10 +6,12 @@ import UserFormStepThree from "@/components/user-registration/form-step-three";
 import UserFormStepTwo from "@/components/user-registration/form-step-two";
 import { User, defaultUser } from "@/types/user";
 import { useState } from "react";
+import { userService } from "@/service/service-user";
+import { useRouter } from "next/navigation";
 
 const MultiStepForm: React.FC = () => {
   const [step, setStep] = useState<number>(1);
-
+  const router = useRouter();
   const [createUser, setCreateUser] = useState<User>(defaultUser);
 
   const nextStep = (): void => {
@@ -29,7 +31,10 @@ const MultiStepForm: React.FC = () => {
     updateUser(name, value);
   };
 
-  const confirmation = (): void => {};
+  const confirmation = async () => {
+    const response = await userService.createUser(createUser);
+    router.push("/");
+  };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
