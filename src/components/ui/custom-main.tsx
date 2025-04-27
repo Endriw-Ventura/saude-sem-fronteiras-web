@@ -4,7 +4,7 @@ interface CustomMainProps {
 
 export default function CustomMain({ children }: CustomMainProps) {
   return (
-    <main className="flex flex-col gap-[32px] row-start-2 items-center justify-items-center">
+    <main className="flex flex-col items-center justify-evenly bg-[#272727] p-8 rounded-lg h-auto min-h-[75%] w-[50%] overflow-y-auto">
       {children}
     </main>
   );

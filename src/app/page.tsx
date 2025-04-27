@@ -33,12 +33,14 @@ export default function LoginPage() {
           type="email"
           placeholder="Enter your email"
           name="email"
+          label="Email"
           value={email}
           changeHandler={(e) => setEmail(e.target.value)}
         />
         <CustomInput
           type="password"
           name="password"
+          label="Password"
           placeholder="Enter your password"
           value={password}
           changeHandler={(e) => setPassword(e.target.value)}

@@ -75,55 +75,55 @@ export default function SchedulePage() {
   }
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <CustomMain>
-        <CustomForm submitHandler={handleSubmit}>
-          <CustomSelect
-            itemList={specialities}
-            value={selectedSpeciality}
-            handleOnChange={setSelectedSpeciality}
-            getLabel={(p) => p!.name}
-          />
-          <CustomInput
-            placeholder="Enter the date"
-            name="date"
-            value={selectedDate}
-            required
-            type="date"
-            changeHandler={(e) => setSelectedDate(e.target.value)}
-          />
-          <CustomInput
-            placeholder="Enter the time"
-            name="time"
-            value={selectedTime}
-            required
-            type="time"
-            changeHandler={(e) => setSelectedTime(e.target.value)}
-          />
+    <CustomMain>
+      <CustomForm submitHandler={handleSubmit}>
+        <CustomSelect
+          itemList={specialities}
+          value={selectedSpeciality}
+          handleOnChange={setSelectedSpeciality}
+          getLabel={(p) => p!.name}
+        />
+        <CustomInput
+          placeholder="Enter the date"
+          name="date"
+          label="Date"
+          value={selectedDate}
+          required
+          type="date"
+          changeHandler={(e) => setSelectedDate(e.target.value)}
+        />
+        <CustomInput
+          placeholder="Enter the time"
+          name="time"
+          label="Time"
+          value={selectedTime}
+          required
+          type="time"
+          changeHandler={(e) => setSelectedTime(e.target.value)}
+        />
 
-          {selectedSpeciality &&
-          selectedDate &&
-          selectedTime &&
-          doctors.length > 0 ? (
-            <>
-              <CustomSelect
-                itemList={doctors}
-                value={selectedDoctor}
-                handleOnChange={setSelectedDoctor}
-                getLabel={(d) => `Dr. ${d!.name} ${d!.surname}`}
-              />
-              {selectedDoctor && (
-                <>
-                  <p>{`Preço: R$ ${selectedDoctor.price}`}</p>
-                  <CustomButton type="submit">Agendar</CustomButton>
-                </>
-              )}
-            </>
-          ) : (
-            <p>Não há médicos disponiveis neste dia/horário</p>
-          )}
-        </CustomForm>
-      </CustomMain>
-    </div>
+        {selectedSpeciality &&
+        selectedDate &&
+        selectedTime &&
+        doctors.length > 0 ? (
+          <>
+            <CustomSelect
+              itemList={doctors}
+              value={selectedDoctor}
+              handleOnChange={setSelectedDoctor}
+              getLabel={(d) => `Dr. ${d!.name} ${d!.surname}`}
+            />
+            {selectedDoctor && (
+              <>
+                <p>{`Preço: R$ ${selectedDoctor.price}`}</p>
+                <CustomButton type="submit">Agendar</CustomButton>
+              </>
+            )}
+          </>
+        ) : (
+          <p>Não há médicos disponiveis neste dia/horário</p>
+        )}
+      </CustomForm>
+    </CustomMain>
   );
 }

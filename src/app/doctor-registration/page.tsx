@@ -77,6 +77,7 @@ export default function DoctorRegistrationForm() {
         <CustomInput
           type="text"
           name="name"
+          label="Name"
           value={createDoctor.name}
           placeholder="Enter your name"
           changeHandler={handleInputChange}
@@ -85,6 +86,7 @@ export default function DoctorRegistrationForm() {
         <CustomInput
           type="text"
           name="surname"
+          label="Surname"
           value={createDoctor.name}
           placeholder="Enter your surname"
           changeHandler={handleInputChange}
@@ -93,6 +95,7 @@ export default function DoctorRegistrationForm() {
         <CustomInput
           type="password"
           name="password"
+          label="Password"
           value={createDoctor.password}
           placeholder="Enter your password"
           changeHandler={handleInputChange}
@@ -101,6 +104,7 @@ export default function DoctorRegistrationForm() {
         <CustomInput
           type="email"
           name="email"
+          label="Email"
           value={createDoctor.email}
           placeholder="Enter your email"
           changeHandler={handleInputChange}
@@ -115,6 +119,7 @@ export default function DoctorRegistrationForm() {
 
         <CustomInput
           type="text"
+          label="CRM"
           name="crm"
           value={createDoctor.crm}
           placeholder="Enter your CRM"
@@ -125,6 +130,7 @@ export default function DoctorRegistrationForm() {
           Initial Hour:
           <CustomInput
             type="time"
+            label="Initial Hour"
             name="initialHour"
             changeHandler={handleInputChange}
             value={createDoctor.initialHour}
@@ -136,6 +142,7 @@ export default function DoctorRegistrationForm() {
           Final Hour:
           <CustomInput
             type="time"
+            label="Final Hour"
             name="finalHour"
             changeHandler={handleInputChange}
             value={createDoctor.finalHour}
@@ -151,6 +158,7 @@ export default function DoctorRegistrationForm() {
         <CustomInput
           type="number"
           name="price"
+          label="Price"
           value={createDoctor.price.toString()}
           placeholder="Enter your price per event"
           changeHandler={handleInputChange}

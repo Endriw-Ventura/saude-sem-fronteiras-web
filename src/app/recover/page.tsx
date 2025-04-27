@@ -3,21 +3,24 @@
 import CustomButton from "@/components/ui/custom-button";
 import CustomInput from "@/components/ui/custom-input";
 import CustomMain from "@/components/ui/custom-main";
+import { useState } from "react";
 
 export default function RecoverPage() {
+  const [email, setEmail] = useState("");
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <CustomMain>
-        <CustomInput
-          type={"email"}
-          name={"email"}
-          value={""}
-          placeholder={"Enter your email"}
-          changeHandler={() => {}}
-        />
+    <CustomMain>
+      <CustomInput
+        type="email"
+        name="email"
+        label="Email"
+        value={email}
+        placeholder="Enter your email"
+        changeHandler={(e) => {
+          setEmail(e.target.value);
+        }}
+      />
 
-        <CustomButton>Send request</CustomButton>
-      </CustomMain>
-    </div>
+      <CustomButton>Send request</CustomButton>
+    </CustomMain>
   );
 }
