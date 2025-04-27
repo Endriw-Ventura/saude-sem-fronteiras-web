@@ -6,8 +6,11 @@ import {
   Dispatch,
   ReactNode,
   SetStateAction,
+  useEffect,
   useState,
 } from "react";
+import { userService } from "@/service/service-user";
+import { useRouter } from "next/navigation";
 
 interface ProviderProps {
   children: ReactNode;
@@ -19,8 +22,36 @@ interface UserContextProps {
 }
 
 export const UserContext = createContext<UserContextProps | null>(null);
+
 export const UserProvider = ({ children }: ProviderProps) => {
   const [loggedUser, setLoggedUser] = useState<LoggedUser | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    async function loadUser() {
+      try {
+        const userInfo = await userService.getLoggedUser();
+        if (userInfo) {
+          setLoggedUser(userInfo);
+        }
+      } catch (error) {
+        console.log("Usuário não autenticado");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadUser();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p>Carregando aplicação...</p>
+      </div>
+    );
+  }
 
   return (
     <UserContext.Provider value={{ loggedUser, setLoggedUser }}>

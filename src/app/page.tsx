@@ -14,7 +14,7 @@ import CustomMain from "@/components/ui/custom-main";
 
 export default function LoginPage() {
   const router = useRouter();
-  const { setLoggedUser } = useUser();
+  const { setLoggedUser, loggedUser } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 

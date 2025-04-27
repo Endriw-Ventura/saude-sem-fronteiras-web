@@ -46,10 +46,20 @@ async function editUser(id: Number, user: User) {
   }
 }
 
+async function getLoggedUser() {
+  try {
+    const { data } = await api.get("/User/me");
+    return data;
+  } catch (error) {
+    throw new Error("Falha ao buscar usuário logado");
+  }
+}
+
 export const userService = {
   getUsers,
   getUser,
   createUser,
   editUser,
   deleteUser,
+  getLoggedUser,
 };

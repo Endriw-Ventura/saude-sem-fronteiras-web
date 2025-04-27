@@ -1,3 +1,4 @@
+import { destroyCookie, setCookie } from "nookies";
 import { api } from "./api";
 import router from "next/router";
 
@@ -9,7 +10,10 @@ async function doLogin(email: string, password: string) {
     });
 
     const { token } = data;
-    localStorage.setItem("saudeToken", token);
+    setCookie(null, "saudeToken", token, {
+      maxAge: 60 * 60 * 24,
+      path: "/",
+    });
     return data;
   } catch (error) {
     throw new Error("Falha ao realizar login");
@@ -18,7 +22,7 @@ async function doLogin(email: string, password: string) {
 
 async function doLogout() {
   try {
-    localStorage.removeItem("saudeToken");
+    destroyCookie(null, "saudeToken");
     router.push("/login");
   } catch (error) {
     throw new Error("Falha ao realizar logout");
