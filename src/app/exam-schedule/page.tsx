@@ -1,7 +1,7 @@
 "use client";
 
 import CustomMain from "@/components/ui/custom-main";
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/use-user";
 
 export default function HomePage() {
   const { loggedUser } = useUser();

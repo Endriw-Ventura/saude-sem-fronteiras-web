@@ -5,7 +5,7 @@ import CustomForm from "@/components/ui/custom-form";
 import CustomInput from "@/components/ui/custom-input";
 import CustomMain from "@/components/ui/custom-main";
 import CustomSelect from "@/components/ui/custom-select";
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/use-user";
 import { consultService } from "@/service/service-consult";
 import { doctorService } from "@/service/service-doctor";
 import { specialtyService } from "@/service/service-specialty";

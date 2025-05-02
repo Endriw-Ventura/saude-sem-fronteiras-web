@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/use-user";
 import CustomMain from "@/components/ui/custom-main";
 /*import { consultService } from "@/service/service-consult";
 import { Consult } from "@/types/consult";

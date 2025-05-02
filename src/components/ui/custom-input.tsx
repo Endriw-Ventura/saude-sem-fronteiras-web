@@ -1,3 +1,5 @@
+import CustomLabel from "./custom-label";
+
 interface inputProps {
   type: string;
   name: string;
@@ -18,7 +20,7 @@ export default function CustomInput({
   changeHandler,
 }: inputProps) {
   return (
-    <label className="w-full">
+    <CustomLabel>
       {label}
       <input
         required={required}
@@ -29,6 +31,6 @@ export default function CustomInput({
         placeholder={placeholder}
         className="w-full p-3 rounded-lg bg-zinc-800 text-white border border-zinc-600 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
       />
-    </label>
+    </CustomLabel>
   );
 }

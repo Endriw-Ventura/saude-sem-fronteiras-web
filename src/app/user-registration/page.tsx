@@ -1,118 +1,64 @@
 "use client";
+
+import { useMultiStepForm } from "@/hooks/use-multi-step-form";
 import CustomMain from "@/components/ui/custom-main";
 import UserFormConfirmation from "@/components/user-registration/form-step-confirmation";
 import UserFormStepOne from "@/components/user-registration/form-step-one";
-import UserFormStepThree from "@/components/user-registration/form-step-three";
 import UserFormStepTwo from "@/components/user-registration/form-step-two";
-import { User, defaultUser } from "@/types/user";
-import { useState } from "react";
-import { userService } from "@/service/service-user";
-import { useRouter } from "next/navigation";
+import UserFormStepThree from "@/components/user-registration/form-step-three";
 
-const MultiStepForm: React.FC = () => {
-  const [step, setStep] = useState<number>(1);
-  const router = useRouter();
-  const [createUser, setCreateUser] = useState<User>(defaultUser);
-
-  const nextStep = (): void => {
-    setStep(step + 1);
-  };
-
-  const prevStep = (): void => {
-    setStep(step - 1);
-  };
-
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value } = e.target;
-    updateUser(name, value);
-  };
-
-  const confirmation = async () => {
-    const response = await userService.createUser(createUser);
-    router.push("/");
-  };
-
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    updateUser(name, checked);
-  };
-
-  const updateUser = (name: string, value: string | boolean) => {
-    const keys = name.split(".");
-
-    setCreateUser((prevUser) => {
-      const updatedUser = { ...prevUser };
-
-      if (keys.length === 1) {
-        updatedUser[name as keyof User] = value as any;
-      } else if (keys.length === 2) {
-        const [parent, child] = keys;
-
-        if (parent === "userInfo") {
-          updatedUser.userInfo = {
-            ...updatedUser.userInfo,
-            [child]: value,
-          };
-        } else if (parent === "address") {
-          updatedUser.address = {
-            ...updatedUser.address,
-            [child]: value,
-          };
-        }
-      }
-
-      return updatedUser;
-    });
-  };
+export default function MultiStepForm() {
+  const {
+    step,
+    handleNextStep,
+    handlePrevStep,
+    createUser,
+    handleInputChange,
+    handleCheckboxChange,
+    handleConfirmation,
+    handleSelectChange,
+  } = useMultiStepForm();
 
   const renderStep = () => {
     switch (step) {
       case 1:
         return (
           <UserFormStepOne
-            createUser={createUser}
-            handleInputChange={handleInputChange}
-            handleNextStep={nextStep}
+            user={createUser}
+            onChange={handleInputChange}
+            onNext={handleNextStep}
           />
         );
       case 2:
         return (
           <UserFormStepTwo
-            createUser={createUser}
-            handleInputChange={handleInputChange}
-            handleNextStep={nextStep}
-            handlePreviousStep={prevStep}
+            user={createUser}
+            onChange={handleInputChange}
+            onNext={handleNextStep}
+            onBack={handlePrevStep}
           />
         );
       case 3:
         return (
           <UserFormStepThree
-            createUser={createUser}
-            handleInputChange={handleInputChange}
-            handleNextStep={nextStep}
-            handlePreviousStep={prevStep}
-            handleCheckboxChange={handleCheckboxChange}
+            user={createUser}
+            onCheckboxChange={handleCheckboxChange}
+            onNext={handleNextStep}
+            onBack={handlePrevStep}
+            onChange={handleInputChange}
+            onSelectChange={handleSelectChange}
           />
         );
       case 4:
         return (
           <UserFormConfirmation
-            handleConfirmation={confirmation}
-            createUser={createUser}
-            {...confirmation}
-            handlePreviousStep={prevStep}
+            user={createUser}
+            onConfirm={handleConfirmation}
+            onBack={handlePrevStep}
           />
         );
-      default:
-        return <></>;
     }
   };
 
   return <CustomMain>{renderStep()}</CustomMain>;
-};
-
-export default MultiStepForm;
+}

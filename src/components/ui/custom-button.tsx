@@ -12,7 +12,7 @@ export default function CustomButton({
   return (
     <button
       type={type}
-      className="w-full p-3 rounded-xl bg-gradient-to-r from-gray-800 to-gray-700 text-white font-semibold shadow-md hover:shadow-lg hover:brightness-110 transition-all duration-300"
+      className="w-full p-2 rounded-lg bg-gradient-to-r from-gray-800 to-gray-700 text-white font-semibold shadow-md hover:shadow-lg hover:brightness-110 transition-all duration-300"
       onClick={clickHandler}
     >
       {children}

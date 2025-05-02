@@ -1,35 +1,37 @@
 "use client";
 
-type CustomSelectProps<T> = {
-  itemList: T[];
-  value: T;
+import CustomLabel from "./custom-label";
+
+type CustomSelectProps = {
+  itemList: SelectType[];
+  value: number;
   label: string;
-  handleOnChange: (value: T) => void;
-  getLabel: (item: T) => string;
+  changeHandler: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  name: string;
 };
 
-export default function CustomSelect<T>({
+export default function CustomSelect({
   itemList,
   value,
   label,
-  handleOnChange,
-  getLabel,
-}: CustomSelectProps<T>) {
+  changeHandler,
+  name,
+}: CustomSelectProps) {
   return (
-    <label className="w-full flex flex-col">
+    <CustomLabel>
       {label}
       <select
-        value={itemList.indexOf(value)}
-        onChange={(e) => handleOnChange(itemList[Number(e.target.value)])}
+        name={name}
+        value={value}
+        onChange={changeHandler}
         className="p-2 rounded bg-stone-500 border border-white text-stone-300"
       >
-        <option value="-1">Select...</option>
         {itemList.map((item, index) => (
-          <option key={index} value={index}>
-            {getLabel(item)}
+          <option key={item.id.toString()} value={index}>
+            {item.name}
           </option>
         ))}
       </select>
-    </label>
+    </CustomLabel>
   );
 }

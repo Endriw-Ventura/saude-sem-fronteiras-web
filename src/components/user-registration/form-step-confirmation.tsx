@@ -1,43 +1,45 @@
+"use client";
+
 import { User } from "@/types/user";
 import CustomButton from "../ui/custom-button";
 
-interface multiStepFormThreeProps {
-  createUser: User;
-  handleConfirmation: () => void;
-  handlePreviousStep: () => void;
+interface FormConfirmationProps {
+  user: User;
+  onConfirm: () => void;
+  onBack: () => void;
 }
 
 export default function UserFormConfirmation({
-  createUser,
-  handleConfirmation,
-  handlePreviousStep,
-}: multiStepFormThreeProps) {
+  user,
+  onConfirm,
+  onBack,
+}: FormConfirmationProps) {
   return (
-    <div className="flex flex-col justify-around w-full h-screen p-[10%]">
-      <h2 className="text-center">Form Submitted</h2>
-      <p>Name: {createUser.name}</p>
-      <p>Surname: {createUser.surname}</p>
-      <p>Email: {createUser.email}</p>
-      <p>CPF: {createUser.cpf}</p>
-      <p>Country: {createUser.address.country}</p>
-      <p>State: {createUser.address.state}</p>
-      <p>City: {createUser.address.city}</p>
-      <p>Neighborhood: {createUser.address.neighborhood}</p>
-      <p>Street Name: {createUser.address.streetName}</p>
-      <p>Number: {createUser.address.number}</p>
-      <p>Zipcode: {createUser.address.zipCode}</p>
-      <p>Mothers name: {createUser.userInfo.motherName}</p>
-      <p>Blood Type: {createUser.userInfo.bloodType}</p>
-      <p>
-        Previous Cirurgies:{" "}
-        {createUser.userInfo.previousCirurgies ? "Yes" : "No"}
-      </p>
-      <p>Medical Condition: {createUser.userInfo.medicalCondition}</p>
-      <p>Allergies: {createUser.userInfo.allergies}</p>
-      <p>Medications: {createUser.userInfo.medications}</p>
-      <p>Cirurgies: {createUser.userInfo.cirurgies}</p>
-      <CustomButton clickHandler={handleConfirmation}>Confirm</CustomButton>
-      <CustomButton clickHandler={handlePreviousStep}>Go back</CustomButton>
-    </div>
+    <>
+      <h2 className="text-center">Confirm Data</h2>
+      <p>Name: {user.name}</p>
+      <p>Surname: {user.surname}</p>
+      <p>Email: {user.email}</p>
+      <p>CPF: {user.cpf}</p>
+      <p>Country: {user.address.country}</p>
+      <p>State: {user.address.state}</p>
+      <p>City: {user.address.city}</p>
+      <p>Neighborhood: {user.address.neighborhood}</p>
+      <p>Street Name: {user.address.streetName}</p>
+      <p>Number: {user.address.number}</p>
+      <p>Zipcode: {user.address.zipCode}</p>
+      <p>Mother's name: {user.userInfo.motherName}</p>
+      <p>Blood Type: {user.userInfo.bloodType}</p>
+      <p>Previous Surgeries: {user.userInfo.cirurgies}</p>
+      <p>Medical Condition: {user.userInfo.medicalCondition}</p>
+      <p>Allergies: {user.userInfo.allergies}</p>
+      <p>Medications: {user.userInfo.medications}</p>
+      <p>Surgeries: {user.userInfo.cirurgies}</p>
+
+      <div className="flex w-full gap-10 justify-between mt-4">
+        <CustomButton clickHandler={onBack}>Go Back</CustomButton>
+        <CustomButton clickHandler={onConfirm}>Confirm</CustomButton>
+      </div>
+    </>
   );
 }

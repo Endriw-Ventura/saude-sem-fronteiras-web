@@ -1,57 +1,63 @@
+"use client";
 import { User } from "@/types/user";
 import CustomButton from "../ui/custom-button";
 import CustomInput from "../ui/custom-input";
 
-interface multiStepFormOneProps {
-  createUser: User;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleNextStep: () => void;
+interface FormOneProps {
+  user: User;
+  onNext: () => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function UserFormStepOne({
-  createUser,
-  handleInputChange,
-  handleNextStep,
-}: multiStepFormOneProps) {
+  user,
+  onNext,
+  onChange,
+}: FormOneProps) {
   return (
-    <div className="flex flex-col justify-around w-full h-screen p-[10%]">
+    <>
       <h2 className="text-center">Step 1: Basic Info</h2>
       <CustomInput
         type="text"
         name="name"
-        value={createUser.name}
+        value={user.name}
         placeholder="Enter your name"
-        changeHandler={handleInputChange}
+        changeHandler={onChange}
+        label="Name"
       />
       <CustomInput
         type="text"
         name="surname"
-        value={createUser.surname}
+        value={user.surname}
         placeholder="Enter your surname"
-        changeHandler={handleInputChange}
+        changeHandler={onChange}
+        label="Surname"
       />
       <CustomInput
         type="text"
         name="cpf"
-        value={createUser?.cpf}
+        value={user.cpf}
         placeholder="Enter your CPF"
-        changeHandler={handleInputChange}
+        changeHandler={onChange}
+        label="CPF"
       />
       <CustomInput
         type="email"
         name="email"
-        value={createUser?.email}
+        value={user.email}
         placeholder="Enter your email"
-        changeHandler={handleInputChange}
+        changeHandler={onChange}
+        label="Email"
       />
       <CustomInput
         type="password"
         name="password"
-        value={createUser?.password}
+        value={user.password}
         placeholder="Enter your password"
-        changeHandler={handleInputChange}
+        changeHandler={onChange}
+        label="Password"
       />
-      <CustomButton clickHandler={handleNextStep}>Next</CustomButton>
-    </div>
+      <CustomButton clickHandler={onNext}>Next</CustomButton>
+    </>
   );
 }

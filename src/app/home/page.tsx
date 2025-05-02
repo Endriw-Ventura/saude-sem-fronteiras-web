@@ -2,7 +2,7 @@
 
 import CustomMain from "@/components/ui/custom-main";
 import NavButton from "@/components/ui/nav-button";
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/use-user";
 import Link from "next/link";
 
 export default function HomePage() {

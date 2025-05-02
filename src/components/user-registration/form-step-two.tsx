@@ -1,81 +1,95 @@
-import { User } from "@/types/user";
+"use client";
+
 import CustomInput from "../ui/custom-input";
 import CustomButton from "../ui/custom-button";
+import { User } from "@/types/user";
 
-interface multiStepFormTwoProps {
-  createUser: User;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleNextStep: () => void;
-  handlePreviousStep: () => void;
+interface FormTwoProps {
+  user: User;
+  onNext: () => void;
+  onBack: () => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function UserFormStepTwo({
-  createUser,
-  handleInputChange,
-  handleNextStep,
-  handlePreviousStep,
-}: multiStepFormTwoProps) {
+  user,
+  onNext,
+  onBack,
+  onChange,
+}: FormTwoProps) {
   return (
-    <div className="flex flex-col justify-around w-full h-screen p-[10%]">
+    <>
       <h2 className="text-center">Step 2: Address</h2>
+
       <CustomInput
         type="text"
-        name="address.country"
-        value={createUser.address.country}
+        name="country"
+        value={user.address.country}
+        label="Country"
         placeholder="Enter your country"
-        changeHandler={handleInputChange}
+        changeHandler={onChange}
       />
       <CustomInput
         type="text"
-        name="address.state"
-        value={createUser.address.state}
+        name="state"
+        value={user.address.state}
+        label="State"
         placeholder="Enter your state"
-        changeHandler={handleInputChange}
+        changeHandler={onChange}
       />
       <CustomInput
         type="text"
-        name="address.city"
-        value={createUser.address.city}
+        name="city"
+        value={user.address.city}
         placeholder="Enter your city"
-        changeHandler={handleInputChange}
+        label="City"
+        changeHandler={onChange}
       />
       <CustomInput
         type="text"
-        name="address.neighborhood"
-        value={createUser.address.neighborhood}
+        name="neighborhood"
+        value={user.address.neighborhood}
         placeholder="Enter your neighborhood"
-        changeHandler={handleInputChange}
+        label="Neighborhood"
+        changeHandler={onChange}
       />
       <CustomInput
         type="text"
-        name="address.streetName"
-        value={createUser.address.streetName}
+        name="streetName"
+        value={user.address.streetName}
         placeholder="Enter your street name"
-        changeHandler={handleInputChange}
+        label="Street Name"
+        changeHandler={onChange}
       />
       <CustomInput
         type="number"
-        name="address.number"
-        value={createUser.address.number}
+        name="number"
+        value={user.address.number}
         placeholder="Enter your house number"
-        changeHandler={handleInputChange}
+        changeHandler={onChange}
+        label="Number"
       />
       <CustomInput
         type="text"
-        name="address.complement"
-        value={createUser.address.complement}
+        name="complement"
+        value={user.address.complement}
         placeholder="Enter any complement"
-        changeHandler={handleInputChange}
+        changeHandler={onChange}
+        label="Complement"
       />
       <CustomInput
         type="number"
-        name="address.zipCode"
-        value={createUser.address.zipCode}
-        placeholder="Enter your zipCode"
-        changeHandler={handleInputChange}
+        name="zipCode"
+        value={user.address.zipCode}
+        placeholder="Enter your zip code"
+        changeHandler={onChange}
+        label="Zip Code"
       />
-      <CustomButton clickHandler={handlePreviousStep}>Back</CustomButton>
-      <CustomButton clickHandler={handleNextStep}>Next</CustomButton>
-    </div>
+
+      <div className="flex w-full gap-10 justify-between mt-4">
+        <CustomButton clickHandler={onBack}>Back</CustomButton>
+        <CustomButton clickHandler={onNext}>Next</CustomButton>
+      </div>
+    </>
   );
 }

@@ -1,27 +1,30 @@
-interface inputProps {
-  type: string;
+import CustomLabel from "./custom-label";
+
+interface InputProps {
   name: string;
   label: string;
   checked: boolean;
-  placeholder: string;
+  row?: boolean;
   changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function CustomCheckbox({
-  type,
   name,
-  placeholder,
+  label,
   checked,
+  row = false,
   changeHandler,
-}: inputProps) {
+}: InputProps) {
   return (
-    <input
-      type={type}
-      name={name}
-      checked={checked}
-      onChange={changeHandler}
-      placeholder={placeholder}
-      className="p-2 rounded bg-stone-500 border border-white text-white"
-    />
+    <CustomLabel row={row}>
+      {label}
+      <input
+        type="checkbox"
+        name={name}
+        checked={checked}
+        onChange={changeHandler}
+        className="p-2 rounded bg-stone-500 border border-white text-white"
+      />
+    </CustomLabel>
   );
 }

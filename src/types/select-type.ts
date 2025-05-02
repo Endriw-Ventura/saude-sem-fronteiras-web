@@ -1,4 +1,4 @@
-export interface Specialty {
+interface SelectType {
   id: Number;
   name: string;
 }

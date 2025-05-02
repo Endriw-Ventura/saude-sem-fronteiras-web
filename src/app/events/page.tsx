@@ -2,7 +2,7 @@
 
 import CustomButton from "@/components/ui/custom-button";
 import CustomMain from "@/components/ui/custom-main";
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/use-user";
 import { consultService } from "@/service/service-consult";
 import { ConsultList } from "@/types/consult";
 import { useEffect, useState } from "react";

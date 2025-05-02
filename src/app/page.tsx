@@ -2,7 +2,7 @@
 
 import Logo from "@/components/ui/logo";
 import { useRouter } from "next/navigation";
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/use-user";
 import { loginService } from "@/service/service-login";
 import { LoggedUser } from "@/types/logged-user";
 import { useState } from "react";

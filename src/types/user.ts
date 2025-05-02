@@ -27,12 +27,18 @@ export const defaultUser: User = {
   password: "",
   userInfo: {
     motherName: "",
-    bloodType: "",
+    bloodType: {
+      id: 0,
+      name: "",
+    },
     allergies: [""],
     previousCirurgies: false,
     cirurgies: [""],
     medications: [""],
-    medicalCondition: "",
+    medicalCondition: {
+      id: 0,
+      name: "",
+    },
   },
   address: {
     country: "",
