@@ -15,19 +15,18 @@ import { useRouter } from "next/navigation";
 
 export default function DoctorRegistrationForm() {
   const [createDoctor, setCreateDoctor] = useState<Doctor>(defaultDoctor);
-  const [options, setOptions] = useState<Specialty[]>([]);
-  const [selected, setSelected] = useState<Specialty | null>(null);
+  const [specialties, setSpecialties] = useState<Specialty[]>([]);
+  const [selectedSpecialtyIndex, setSelectedSpecialtyIndex] = useState(0);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await doctorService.createDoctor(createDoctor);
+    await doctorService.createDoctor(createDoctor);
     router.push("/");
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
-
     setCreateDoctor((prev) => ({
       ...prev,
       WeekdaysDTO: {
@@ -38,9 +37,7 @@ export default function DoctorRegistrationForm() {
   };
 
   const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setCreateDoctor((prev) => ({
@@ -50,31 +47,29 @@ export default function DoctorRegistrationForm() {
   };
 
   const handleSpecialtyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedOption = options.find(
-      (s) => s.id.toString() == e.target.value
-    );
-    setSelected(selectedOption!);
+    const index = Number(e.target.value);
+    const specialty = specialties[index];
+    setSelectedSpecialtyIndex(index);
     setCreateDoctor((prev) => ({
       ...prev,
-      specialtyId: parseInt(e.target.value),
+      specialtyId: specialty.id,
     }));
   };
 
   useEffect(() => {
-    const fetchItems = async () => {
+    const fetchSpecialties = async () => {
       try {
         const response = await specialtyService.getSpecialties();
-        setOptions(response);
-        setSelected(response[0]);
+        setSpecialties(response);
         setCreateDoctor((prev) => ({
           ...prev,
-          specialtyId: response[0].id,
+          specialtyId: response[0]?.id || 0,
         }));
       } catch (error) {
-        console.error("Erro ao buscar os itens:", error);
+        console.error("Erro ao buscar especialidades:", error);
       }
     };
-    fetchItems();
+    fetchSpecialties();
   }, []);
 
   return (
@@ -117,11 +112,11 @@ export default function DoctorRegistrationForm() {
         />
 
         <CustomSelect
-          itemList={options}
-          value={0}
-          label={"Specialty"}
-          changeHandler={(e) => handleSpecialtyChange(e)}
-          name={"specilaty"}
+          name="specialty"
+          label="Specialty"
+          itemList={specialties}
+          value={selectedSpecialtyIndex}
+          changeHandler={handleSpecialtyChange}
         />
 
         <CustomInput
@@ -139,7 +134,7 @@ export default function DoctorRegistrationForm() {
           name="initialHour"
           changeHandler={handleInputChange}
           value={createDoctor.initialHour}
-          placeholder={"Enter your starting hour"}
+          placeholder="Enter your starting hour"
         />
 
         <CustomInput
@@ -164,6 +159,7 @@ export default function DoctorRegistrationForm() {
           placeholder="Enter your price per event"
           changeHandler={handleInputChange}
         />
+
         <CustomButton type="submit">Cadastrar</CustomButton>
       </CustomForm>
     </CustomMain>

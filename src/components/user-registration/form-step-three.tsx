@@ -16,7 +16,6 @@ interface FormThreeProps {
   onChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  onCheckboxChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
@@ -25,7 +24,6 @@ export default function UserFormStepThree({
   onNext,
   onBack,
   onChange,
-  onCheckboxChange,
   onSelectChange,
 }: FormThreeProps) {
   const [isCheckedAllergies, setIsCheckedAllergies] = useState(false);

@@ -78,12 +78,15 @@ export default function SchedulePage() {
     <CustomMain>
       <CustomForm submitHandler={handleSubmit}>
         <CustomSelect
+          name="specialty"
           label="Specialty"
           itemList={specialities}
-          value={selectedSpeciality}
-          handleOnChange={setSelectedSpeciality}
-          getLabel={(p) => p!.name}
+          value={specialities.findIndex((s) => s.id === selectedSpeciality?.id)}
+          changeHandler={(e) =>
+            setSelectedSpeciality(specialities[Number(e.target.value)])
+          }
         />
+
         <CustomInput
           placeholder="Enter the date"
           name="date"
@@ -93,6 +96,7 @@ export default function SchedulePage() {
           type="date"
           changeHandler={(e) => setSelectedDate(e.target.value)}
         />
+
         <CustomInput
           placeholder="Enter the time"
           name="time"
@@ -109,11 +113,13 @@ export default function SchedulePage() {
         doctors.length > 0 ? (
           <>
             <CustomSelect
+              name="doctor"
               label="Doctors"
               itemList={doctors}
-              value={selectedDoctor}
-              handleOnChange={setSelectedDoctor}
-              getLabel={(d) => `Dr. ${d!.name} ${d!.surname}`}
+              value={doctors.findIndex((doc) => doc.id === selectedDoctor?.id)}
+              changeHandler={(e) =>
+                setSelectedDoctor(doctors[Number(e.target.value)])
+              }
             />
             {selectedDoctor && (
               <>
