@@ -49,11 +49,14 @@ export default function DoctorRegistrationForm() {
     }));
   };
 
-  const handleSpecialtyChange = (specialty: Specialty) => {
-    setSelected(specialty);
+  const handleSpecialtyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedOption = options.find(
+      (s) => s.id.toString() == e.target.value
+    );
+    setSelected(selectedOption!);
     setCreateDoctor((prev) => ({
       ...prev,
-      specialtyId: specialty.id,
+      specialtyId: parseInt(e.target.value),
     }));
   };
 
@@ -115,10 +118,10 @@ export default function DoctorRegistrationForm() {
 
         <CustomSelect
           itemList={options}
-          value={selected!}
-          label="Specialty"
-          handleOnChange={handleSpecialtyChange}
-          getLabel={(s) => s.name}
+          value={0}
+          label={"Specialty"}
+          changeHandler={(e) => handleSpecialtyChange(e)}
+          name={"specilaty"}
         />
 
         <CustomInput
