@@ -46,7 +46,7 @@ export default function EventsPage() {
           const date = dateTime[0];
           const time = dateTime[1];
           return (
-            <div className="p-[8px] w-full">
+            <div key={id.toString()} className="p-[8px] w-full">
               <table
                 className="table-fixed border-collapse w-full"
                 border={1}
