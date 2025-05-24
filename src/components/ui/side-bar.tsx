@@ -9,7 +9,6 @@ export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const { loggedUser, setLoggedUser } = useUser();
-  const { doLogout } = loginService;
 
   const links = [
     { href: "/home", label: "Home" },
@@ -28,7 +27,7 @@ export default function Sidebar() {
   if (!loggedUser) return null;
 
   return (
-    <aside className="w-auto p-8 h-screen bg-[#272727] text-white flex flex-col justify-center items-center">
+    <aside className="w-auto p-8 h-screen bg-[#272727] text-white flex flex-col justify-center items-center absolute left-0">
       <nav>
         <ul className="list-none p-0">
           {links.map((link) => (
@@ -47,7 +46,7 @@ export default function Sidebar() {
             </li>
           ))}
           <li className="mt-4">
-            <CustomButton clickHandler={handleLogout}>Sair</CustomButton>
+            <CustomButton clickHandler={handleLogout}>Logout</CustomButton>
           </li>
         </ul>
       </nav>
