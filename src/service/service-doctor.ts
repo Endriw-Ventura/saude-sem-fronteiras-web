@@ -1,12 +1,14 @@
 import { Doctor, SimpleDoctor } from "@/types/doctor";
 import { api } from "./api";
+import { toast } from "react-toastify";
 
 async function getDoctors() {
   try {
     const { data } = await api.get(`/Doctor`);
     return data;
   } catch (error) {
-    throw new Error("Falha ao buscar usuário");
+    toast.error("Couldnt fetch doctors!");
+    throw new Error("Something went wrong");
   }
 }
 
@@ -20,7 +22,8 @@ async function getAvailableDoctors(
     );
     return data;
   } catch (error) {
-    throw new Error("Falha ao buscar médicos");
+    toast.error("Couldnt fetch available doctors!");
+    throw new Error("Something went wrong");
   }
 }
 
@@ -29,31 +32,38 @@ async function getDoctor(id: Number) {
     const { data } = await api.get(`/Doctor/${id}`);
     return data;
   } catch (error) {
-    throw new Error("Falha ao buscar médicos");
+    toast.error("Couldnt fetch doctor!");
+    throw new Error("Something went wrong");
   }
 }
 
 async function createDoctor(doctor: Doctor) {
   try {
     const response = await api.post("/Doctor/", doctor);
+    toast.success("Doctor created succesfully!");
   } catch (error) {
-    throw new Error("Falha ao criar médico");
+    toast.error("Couldnt create doctor!");
+    throw new Error("Something went wrong");
   }
 }
 
 async function deleteDoctor(id: Number) {
   try {
     const response = await api.delete(`/Doctor/${id}`);
+    toast.success("Doctor deleted succesfully!");
   } catch (error) {
-    throw new Error("Falha ao deletar médico");
+    toast.error("Couldnt delete doctor!");
+    throw new Error("Something went wrong");
   }
 }
 
 async function editDoctor(id: Number, doctor: Doctor) {
   try {
     const response = await api.put(`/Doctor/speciality/${id}`, doctor);
+    toast.success("Doctor updated succesfully!");
   } catch (error) {
-    throw new Error("Falha ao editar médico");
+    toast.error("Couldnt update doctor!");
+    throw new Error("Something went wrong");
   }
 }
 

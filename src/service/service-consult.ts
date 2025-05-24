@@ -1,13 +1,14 @@
-import { Doctor } from "@/types/doctor";
 import { api } from "./api";
 import { Consult, ConsultList, SimpleConsult } from "@/types/consult";
+import { toast } from "react-toastify";
 
 async function getConsults(): Promise<Consult[]> {
   try {
     const { data } = await api.get(`/Event`);
     return data;
   } catch (error) {
-    throw new Error("Falha ao buscar consultas");
+    toast.error("Couldnt fetch events!");
+    throw new Error("Something went wrong");
   }
 }
 
@@ -19,7 +20,8 @@ async function getUserConsults(
     const { data } = await api.get(`/Event/${role}/${id}`);
     return data;
   } catch (error) {
-    throw new Error("Falha ao buscar consultas");
+    toast.error("Couldnt fetch events!");
+    throw new Error("Something went wrong");
   }
 }
 
@@ -28,31 +30,38 @@ async function getConsult(id: Number): Promise<Consult> {
     const { data } = await api.get(`/Event/${id}`);
     return data;
   } catch (error) {
-    throw new Error("Falha ao buscar consulta");
+    toast.error("Couldnt fetch event!");
+    throw new Error("Something went wrong");
   }
 }
 
 async function createConsult(consult: SimpleConsult): Promise<void> {
   try {
     const response = await api.post("/Event/", consult);
+    toast.success("Event created successfully!");
   } catch (error) {
-    throw new Error("Falha ao criar consulta");
+    toast.error("Couldnt create event!");
+    throw new Error("Something went wrong");
   }
 }
 
 async function deleteConsult(id: Number): Promise<void> {
   try {
     const response = await api.delete(`/Event/${id}`);
+    toast.success("Event deleted successfully!");
   } catch (error) {
-    throw new Error("Falha ao deletar consulta");
+    toast.error("Couldnt delete event!");
+    throw new Error("Something went wrong");
   }
 }
 
 async function editConsult(id: Number, consult: Consult): Promise<void> {
   try {
     const response = await api.put(`/Event/${id}`, consult);
+    toast.success("Event updated successfully!");
   } catch (error) {
-    throw new Error("Falha ao editar consulta");
+    toast.error("Couldnt edit event!");
+    throw new Error("Something went wrong");
   }
 }
 
