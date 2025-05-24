@@ -38,7 +38,7 @@ export default function EventsPage() {
 
   return (
     <CustomMain>
-      <h1>Suas consultas</h1>
+      <h1>Your Events</h1>
       {consults.length > 0 ? (
         consults.map((consult: ConsultList) => {
           const { pacient, doctor, moment, id } = consult;
@@ -55,12 +55,12 @@ export default function EventsPage() {
               >
                 <thead className="text-center">
                   <tr>
-                    <th className="w-1/6">Nome do Paciente</th>
-                    <th className="w-1/6">Nome do Médico</th>
-                    <th className="w-1/6">Data</th>
-                    <th className="w-1/6">Hora</th>
-                    <th className="w-1/6">Valor</th>
-                    <th className="w-1/6">Ações</th>
+                    <th className="w-1/6">Patients Name</th>
+                    <th className="w-1/6">Doctors Name</th>
+                    <th className="w-1/6">Date</th>
+                    <th className="w-1/6">Time</th>
+                    <th className="w-1/6">Value</th>
+                    <th className="w-1/6">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="text-center">
@@ -72,7 +72,7 @@ export default function EventsPage() {
                     <td className="w-1/6">{`R$ ${doctor.price}`}</td>
                     <td className="w-1/6">
                       <CustomButton clickHandler={() => handleRemover(id)}>
-                        Cancelar
+                        Cancel
                       </CustomButton>
                     </td>
                   </tr>
@@ -82,7 +82,7 @@ export default function EventsPage() {
           );
         })
       ) : (
-        <p>Sem consultas marcadas</p>
+        <p>No events Scheduled</p>
       )}
     </CustomMain>
   );

@@ -160,7 +160,7 @@ export default function DoctorRegistrationForm() {
           changeHandler={handleInputChange}
         />
 
-        <CustomButton type="submit">Cadastrar</CustomButton>
+        <CustomButton type="submit">Register</CustomButton>
       </CustomForm>
     </CustomMain>
   );

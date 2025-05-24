@@ -4,7 +4,6 @@ import CustomButton from "./custom-button";
 import { usePathname, useRouter } from "next/navigation";
 import { useUser } from "@/hooks/use-user";
 import { loginService } from "@/service/service-login";
-import { useEffect } from "react";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -13,11 +12,11 @@ export default function Sidebar() {
   const { doLogout } = loginService;
 
   const links = [
-    { href: "/home", label: "Início" },
-    { href: "/events", label: "Consultas" },
-    { href: "/exams", label: "Exames" },
-    { href: "/exam-schedule", label: "Marcar Exame" },
-    { href: "/schedule", label: "Marcar Consulta" },
+    { href: "/home", label: "Home" },
+    { href: "/events", label: "Events" },
+    { href: "/exams", label: "Exams" },
+    { href: "/exam-schedule", label: "Schedule Exam" },
+    { href: "/schedule", label: "Schedule Event" },
   ];
 
   const handleLogout = async () => {

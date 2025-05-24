@@ -14,7 +14,7 @@ import CustomMain from "@/components/ui/custom-main";
 
 export default function LoginPage() {
   const router = useRouter();
-  const { setLoggedUser, loggedUser } = useUser();
+  const { setLoggedUser } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -45,9 +45,9 @@ export default function LoginPage() {
           value={password}
           changeHandler={(e) => setPassword(e.target.value)}
         />
-        <CustomButton type="submit">Entrar</CustomButton>
-        <NavButton route="/registration" buttonText="Cadastrar" />
-        <NavButton route="/recover" buttonText="Esqueci minha senha" />
+        <CustomButton type="submit">Login</CustomButton>
+        <NavButton route="/registration" buttonText="Register" />
+        <NavButton route="/recover" buttonText="Forgot your Password?" />
       </CustomForm>
     </CustomMain>
   );

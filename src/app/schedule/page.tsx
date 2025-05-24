@@ -123,12 +123,12 @@ export default function SchedulePage() {
             {selectedDoctor && (
               <>
                 <p>{`Price: R$ ${selectedDoctor.price}`}</p>
-                <CustomButton type="submit">Agendar</CustomButton>
+                <CustomButton type="submit">Schedule</CustomButton>
               </>
             )}
           </>
         ) : (
-          <p>Não há médicos disponiveis neste dia/horário</p>
+          <p>There are no doctors for this time and/or date</p>
         )}
       </CustomForm>
     </CustomMain>

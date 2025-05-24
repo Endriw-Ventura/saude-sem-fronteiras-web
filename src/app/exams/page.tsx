@@ -15,23 +15,6 @@ export default function ExamsPage() {
   if (!loggedUser) {
     router.push("/");
   }
-  const { role } = loggedUser!;
-  /*const [consults, setConsults] = useState<Consult[]>([]);
-
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const response = await consultService.getUserConsults(
-          loggedUser!.id,
-          role
-        );
-        setConsults(response);
-      } catch (error) {
-        console.error("Erro ao buscar os itens:", error);
-      }
-    };
-    fetchItems();
-  }, []);*/
 
   return (
     <CustomMain>
