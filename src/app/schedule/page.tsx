@@ -16,7 +16,6 @@ import { useEffect, useState } from "react";
 
 export default function SchedulePage() {
   const { loggedUser } = useUser();
-  const { role } = loggedUser!;
   const [specialities, setSpecialities] = useState<Specialty[]>([]);
   const [doctors, setDoctors] = useState<SimpleDoctor[]>([]);
   const [selectedTime, setSelectedTime] = useState("");

@@ -1,6 +1,5 @@
 import { destroyCookie, setCookie } from "nookies";
 import { api } from "./api";
-import router from "next/router";
 
 async function doLogin(email: string, password: string) {
   try {
@@ -20,10 +19,10 @@ async function doLogin(email: string, password: string) {
   }
 }
 
-async function doLogout() {
+async function doLogout(router: any) {
   try {
     destroyCookie(null, "saudeToken");
-    router.push("/login");
+    router.refresh();
   } catch (error) {
     throw new Error("Falha ao realizar logout");
   }

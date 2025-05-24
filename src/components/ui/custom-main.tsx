@@ -1,3 +1,5 @@
+import Sidebar from "./side-bar";
+
 interface CustomMainProps {
   children: React.ReactNode;
 }

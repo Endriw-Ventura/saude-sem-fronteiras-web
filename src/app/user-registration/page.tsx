@@ -42,7 +42,6 @@ export default function MultiStepForm() {
         return (
           <UserFormStepThree
             user={createUser}
-            onCheckboxChange={handleCheckboxChange}
             onNext={handleNextStep}
             onBack={handlePrevStep}
             onChange={handleInputChange}
