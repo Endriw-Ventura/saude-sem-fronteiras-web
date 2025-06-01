@@ -3,10 +3,6 @@
 import { useRouter } from "next/navigation";
 import { useUser } from "@/hooks/use-user";
 import CustomMain from "@/components/ui/custom-main";
-/*import { consultService } from "@/service/service-consult";
-import { Consult } from "@/types/consult";
-import { useEffect, useState } from "react";
-*/
 
 export default function ExamsPage() {
   const router = useRouter();
@@ -18,7 +14,7 @@ export default function ExamsPage() {
 
   return (
     <CustomMain>
-      <p>Sem exames marcados</p>
+      <p>No Exams Scheluded</p>
     </CustomMain>
   );
 }
