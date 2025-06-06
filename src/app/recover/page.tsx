@@ -3,10 +3,16 @@
 import CustomButton from "@/components/ui/custom-button";
 import CustomInput from "@/components/ui/custom-input";
 import CustomMain from "@/components/ui/custom-main";
+import { emailService } from "@/service/service-email";
 import { useState } from "react";
 
 export default function RecoverPage() {
   const [email, setEmail] = useState("");
+
+  const sendEmail = async () => {
+    await emailService.sendEmail(email);
+  };
+
   return (
     <CustomMain>
       <CustomInput
@@ -20,7 +26,7 @@ export default function RecoverPage() {
         }}
       />
 
-      <CustomButton>Send request</CustomButton>
+      <CustomButton clickHandler={sendEmail}>Send request</CustomButton>
     </CustomMain>
   );
 }
