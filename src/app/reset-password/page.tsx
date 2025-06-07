@@ -13,11 +13,16 @@ export default function ResetPassword() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setconfirmPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const result = await emailService.resetPassword(token, password);
-    router.push("/");
+    if (password === confirmPassword) {
+      const result = await emailService.resetPassword(token, password);
+      router.push("/");
+    } else {
+      toast.error("Passwords dont match!");
+    }
   };
 
   return (
@@ -30,6 +35,15 @@ export default function ResetPassword() {
         value={password}
         changeHandler={(e) => setPassword(e.target.value)}
         placeholder="New Password"
+        required
+      />
+      <CustomInput
+        type="password"
+        name="confirmPassword"
+        label="Confirm Password"
+        value={password}
+        changeHandler={(e) => setPassword(e.target.value)}
+        placeholder="Confirm Password"
         required
       />
       <CustomButton type="submit">Submit</CustomButton>
