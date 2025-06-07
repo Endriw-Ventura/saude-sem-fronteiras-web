@@ -19,10 +19,8 @@ export default function ResetPassword() {
     e.preventDefault();
     if (password === confirmPassword) {
       const result = await emailService.resetPassword(token, password);
-      router.push("/");
-    } else {
-      toast.error("Passwords dont match!");
-    }
+      if (result?.status === 200) router.push("/");
+    } else toast.error("Passwords dont match!");
   };
 
   return (
