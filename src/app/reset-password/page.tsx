@@ -39,8 +39,8 @@ export default function ResetPassword() {
         type="password"
         name="confirmPassword"
         label="Confirm Password"
-        value={password}
-        changeHandler={(e) => setPassword(e.target.value)}
+        value={confirmPassword}
+        changeHandler={(e) => setconfirmPassword(e.target.value)}
         placeholder="Confirm Password"
         required
       />
