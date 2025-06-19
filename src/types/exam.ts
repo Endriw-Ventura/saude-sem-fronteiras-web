@@ -8,12 +8,14 @@ export interface Exam {
 }
 
 export interface SimpleExam {
-  idPacient: string;
+  idPacient: Number;
+  examName: string;
   moment: string;
 }
 
 export interface ExamList {
   id: Number;
+  examName: string;
   pacient: SimpleUser;
   moment: string;
 }

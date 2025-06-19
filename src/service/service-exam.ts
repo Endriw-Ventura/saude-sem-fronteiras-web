@@ -1,5 +1,6 @@
 import { api } from "./api";
 import { Exam, ExamList, SimpleExam } from "@/types/exam";
+import { SimpleUser } from "@/types/user";
 import { toast } from "react-toastify";
 
 async function getExams(): Promise<Exam[]> {
@@ -15,6 +16,16 @@ async function getExams(): Promise<Exam[]> {
 async function getUserExams(id: Number, role: string): Promise<ExamList[]> {
   try {
     const { data } = await api.get(`/Exam/${role}/${id}`);
+    return data;
+  } catch (error) {
+    toast.error("Couldnt fetch exams!");
+    throw new Error("Something went wrong");
+  }
+}
+
+async function getUsers(id: Number, role: string): Promise<SimpleUser[]> {
+  try {
+    const { data } = await api.get(`/Exam/user/${role}/${id}`);
     return data;
   } catch (error) {
     toast.error("Couldnt fetch exams!");
@@ -38,6 +49,7 @@ async function createExam(exam: SimpleExam): Promise<void> {
     toast.success("Exam created successfully!");
   } catch (error) {
     toast.error("Couldnt create exam!");
+    console.log(error);
     throw new Error("Something went wrong");
   }
 }
@@ -65,6 +77,7 @@ async function editExam(id: Number, exam: Exam): Promise<void> {
 export const examService = {
   getExam,
   getExams,
+  getUsers,
   getUserExams,
   createExam,
   deleteExam,

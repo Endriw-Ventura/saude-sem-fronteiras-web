@@ -12,7 +12,6 @@ export default function HomePage() {
   }
 
   const { role } = loggedUser;
-
   return (
     <CustomMain>
       <NavButton route="/events" buttonText="Events" />

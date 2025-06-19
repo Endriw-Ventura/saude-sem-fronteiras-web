@@ -11,11 +11,11 @@ export default function Sidebar() {
   const { loggedUser, setLoggedUser } = useUser();
 
   const links = [
-    { href: "/home", label: "Home" },
-    { href: "/events", label: "Events" },
-    { href: "/exams", label: "Exams" },
-    { href: "/exam-schedule", label: "Schedule Exam" },
-    { href: "/schedule", label: "Schedule Event" },
+    { href: "/home", label: "Home", roles: ["user", "doctor"] },
+    { href: "/events", label: "Events", roles: ["user", "doctor"] },
+    { href: "/exams", label: "Exams", roles: ["user", "doctor"] },
+    { href: "/exam-schedule", label: "Schedule Exam", roles: ["doctor"] },
+    { href: "/schedule", label: "Schedule Event", roles: ["user"] },
   ];
 
   const handleLogout = async () => {
@@ -25,26 +25,27 @@ export default function Sidebar() {
   };
 
   if (!loggedUser) return null;
-
   return (
     <aside className="w-auto p-8 h-screen bg-[#272727] text-white flex flex-col justify-center items-center absolute left-0">
       <nav>
         <ul className="list-none p-0">
-          {links.map((link) => (
-            <li key={link.href} className="mb-4">
-              <Link href={link.href}>
-                <span
-                  className={`cursor-pointer ${
-                    pathname === link.href
-                      ? "font-bold underline"
-                      : "font-normal"
-                  }`}
-                >
-                  {link.label}
-                </span>
-              </Link>
-            </li>
-          ))}
+          {links
+            .filter((link) => link.roles.includes(loggedUser.role))
+            .map((link) => (
+              <li key={link.href} className="mb-4">
+                <Link href={link.href}>
+                  <span
+                    className={`cursor-pointer ${
+                      pathname === link.href
+                        ? "font-bold underline"
+                        : "font-normal"
+                    }`}
+                  >
+                    {link.label}
+                  </span>
+                </Link>
+              </li>
+            ))}
           <li className="mt-4">
             <CustomButton clickHandler={handleLogout}>Logout</CustomButton>
           </li>
