@@ -58,9 +58,7 @@ async function editUser(id: Number, user: User) {
 async function getLoggedUser() {
   try {
     const { data } = await api.get("/User/me");
-    console.log(api.defaults.baseURL + "/User/me");
     toast.success("User authorized!");
-    debugger;
     return data;
   } catch (error) {
     toast.error("Couldnt authorize user!");

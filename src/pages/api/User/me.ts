@@ -3,7 +3,6 @@ import { users } from "@/mocks/db/users";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const authHeader = req.headers.authorization;
-  console.log("Aqui");
   if (!authHeader)
     return res.status(401).json({ message: "No token provided" });
 
