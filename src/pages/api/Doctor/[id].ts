@@ -5,7 +5,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const {
     query: { id },
     method,
-    body,
   } = req;
 
   const userIndex = users
