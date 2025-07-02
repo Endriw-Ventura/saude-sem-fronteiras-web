@@ -15,7 +15,7 @@ async function getExams(): Promise<Exam[]> {
 
 async function getUserExams(id: Number, role: string): Promise<ExamList[]> {
   try {
-    const { data } = await api.get(`/Exam/${role}/${id}`);
+    const { data } = await api.get(`/ExamsByRole/${role}/${id}`);
     return data;
   } catch (error) {
     toast.error("Couldnt fetch exams!");
@@ -49,7 +49,6 @@ async function createExam(exam: SimpleExam): Promise<void> {
     toast.success("Exam created successfully!");
   } catch (error) {
     toast.error("Couldnt create exam!");
-    console.log(error);
     throw new Error("Something went wrong");
   }
 }

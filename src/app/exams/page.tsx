@@ -10,15 +10,8 @@ import { useEffect, useState } from "react";
 import { ExamList } from "@/types/exam";
 
 export default function ExamsPage() {
-  const router = useRouter();
   const { loggedUser } = useUser();
   const [exams, setExams] = useState<ExamList[]>([]);
-
-  if (!loggedUser) {
-    router.push("/");
-  }
-
-  const { role, id } = loggedUser!;
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -40,6 +33,12 @@ export default function ExamsPage() {
       console.error("Something went wrong:", error);
     }
   };
+
+  if (!loggedUser) {
+    return null;
+  }
+
+  const { role, id } = loggedUser!;
 
   return (
     <CustomMain>

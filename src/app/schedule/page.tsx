@@ -23,7 +23,6 @@ export default function SchedulePage() {
   const router = useRouter();
   const [selectedSpeciality, setSelectedSpeciality] =
     useState<Specialty | null>(null);
-
   const [selectedDoctor, setSelectedDoctor] = useState<SimpleDoctor | null>(
     null
   );
@@ -71,6 +70,10 @@ export default function SchedulePage() {
   function transformDateTime(data: string, hora: string) {
     const dateTimeString = `${data}T${hora}:00`;
     return dateTimeString;
+  }
+
+  if (!loggedUser) {
+    return null;
   }
 
   return (

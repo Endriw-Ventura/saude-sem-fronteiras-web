@@ -33,7 +33,6 @@ export const UserProvider = ({ children }: ProviderProps) => {
           setLoggedUser(userInfo);
         }
       } catch (error) {
-        console.log("Usuário não autenticado");
       } finally {
         setIsLoading(false);
       }

@@ -9,6 +9,11 @@ import { useEffect, useState } from "react";
 
 export default function EventsPage() {
   const { loggedUser } = useUser();
+
+  if (!loggedUser) {
+    return null;
+  }
+
   const [consults, setConsults] = useState<ConsultList[]>([]);
   const { role } = loggedUser!;
 
@@ -19,7 +24,6 @@ export default function EventsPage() {
           loggedUser!.id,
           role
         );
-        console.log(response);
         setConsults(response);
       } catch (error) {
         console.error("Erro ao buscar os itens:", error);
@@ -36,7 +40,6 @@ export default function EventsPage() {
       console.error("Erro ao deletar consulta:", error);
     }
   };
-  console.log(consults);
   return (
     <CustomMain>
       <h1>Your Events</h1>

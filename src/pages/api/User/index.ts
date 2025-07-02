@@ -1,14 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { users } from "@/mocks/db/users";
+import { memoryStore } from "@/mocks/store/memoryStore";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET")
-    return res.status(200).json(users.filter((user) => user.role == "user"));
+    return res
+      .status(200)
+      .json(memoryStore.users.filter((user: any) => user.role == "user"));
 
   if (req.method === "POST") {
     const newUser = req.body;
-    newUser.id = users.length + 1;
-    users.push(newUser);
+    newUser.id = memoryStore.users.length + 1;
+    memoryStore.users.push(newUser);
     return res.status(201).json(newUser);
   }
 
