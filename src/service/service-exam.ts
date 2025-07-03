@@ -15,7 +15,7 @@ async function getExams(): Promise<Exam[]> {
 
 async function getUserExams(id: number, role: string): Promise<ExamList[]> {
   try {
-    const { data } = await api.get(`/Exam/${role}/${id}`);
+    const { data } = await api.get(`/ExamsByRole/${role}/${id}`);
     return data;
   } catch {
     toast.error("Couldnt fetch exams!");

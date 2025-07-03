@@ -23,7 +23,6 @@ export default function SchedulePage() {
   const router = useRouter();
   const [selectedSpeciality, setSelectedSpeciality] =
     useState<Specialty | null>(null);
-
   const [selectedDoctor, setSelectedDoctor] = useState<SimpleDoctor | null>(
     null
   );

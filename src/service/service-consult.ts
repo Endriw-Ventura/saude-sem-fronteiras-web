@@ -17,7 +17,7 @@ async function getUserConsults(
   role: string
 ): Promise<ConsultList[]> {
   try {
-    const { data } = await api.get(`/Event/${role}/${id}`);
+    const { data } = await api.get(`/EventsByRole/${role}/${id}`);
     return data;
   } catch {
     toast.error("Couldnt fetch events!");

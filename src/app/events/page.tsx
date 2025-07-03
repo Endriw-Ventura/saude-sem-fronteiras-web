@@ -9,6 +9,11 @@ import { useEffect, useState } from "react";
 
 export default function EventsPage() {
   const { loggedUser } = useUser();
+
+  if (!loggedUser) {
+    return null;
+  }
+
   const [consults, setConsults] = useState<ConsultList[]>([]);
 
   const handleRemover = async (id: number) => {

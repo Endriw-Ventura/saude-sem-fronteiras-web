@@ -36,6 +36,12 @@ export default function ExamsPage() {
   }
   const { role, id } = loggedUser!;
 
+  if (!loggedUser) {
+    return null;
+  }
+
+  const { role, id } = loggedUser!;
+
   return (
     <CustomMain>
       <h1>Your Exams</h1>

@@ -20,7 +20,7 @@ export default function LoginPage() {
 
   const handleSubmit = async () => {
     const data = await loginService.doLogin(email, password);
-    const parsedData: LoggedUser = { ...data };
+    const parsedData: LoggedUser = { ...data.user };
     setLoggedUser(parsedData);
     router.push("/home");
   };
