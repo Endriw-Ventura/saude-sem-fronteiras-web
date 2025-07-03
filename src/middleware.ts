@@ -3,9 +3,6 @@ import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get("saudeToken")?.value;
-
-  console.log(request.nextUrl.pathname);
-
   const isAuthPage =
     request.nextUrl.pathname === "/" ||
     request.nextUrl.pathname.startsWith("/registration") ||
@@ -28,5 +25,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!_next/static|_next/image|api).*)"],
 };

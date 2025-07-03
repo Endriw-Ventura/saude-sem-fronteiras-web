@@ -13,12 +13,16 @@ import { useEffect, useState } from "react";
 
 export default function SchedulePage() {
   const { loggedUser } = useUser();
+  const router = useRouter();
   const [selectedExam, setSelectedExam] = useState(0);
   const [selectedTime, setSelectedTime] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedUser, setSelectedUser] = useState(0);
   const [pacients, setPacients] = useState<SelectType[]>([]);
-  const router = useRouter();
+
+  if (!loggedUser) {
+    return null;
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     const response = await examService.createExam({

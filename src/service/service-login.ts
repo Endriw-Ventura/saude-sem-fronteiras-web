@@ -8,7 +8,6 @@ async function doLogin(email: string, password: string) {
       email,
       password,
     });
-
     const { token } = data;
     setCookie(null, "saudeToken", token, {
       maxAge: 60 * 60 * 24,
