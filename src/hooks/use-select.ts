@@ -1,3 +1,4 @@
+import { SelectType } from "@/types/select-type";
 import { useState } from "react";
 
 export function useSelect(itemList: SelectType[]) {

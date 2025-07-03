@@ -16,7 +16,7 @@ async function doLogin(email: string, password: string) {
     });
     toast.success("User Logged succesfully!");
     return data;
-  } catch (error) {
+  } catch {
     toast.error("Something went wrong!");
     throw new Error("Falha ao realizar login");
   }
@@ -27,7 +27,7 @@ async function doLogout(router: any) {
     destroyCookie(null, "saudeToken");
     router.refresh();
     toast.success("User Logged out succesfully!");
-  } catch (error) {
+  } catch {
     toast.error("Something went wrong!");
     throw new Error("something went wrong");
   }

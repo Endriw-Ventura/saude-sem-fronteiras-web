@@ -58,8 +58,8 @@ export default function SchedulePage() {
     fetchDoctors();
   }, [selectedSpeciality, selectedDate, selectedTime]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    const response = await consultService.createConsult({
+  const handleSubmit = async () => {
+    await consultService.createConsult({
       idDoctor: selectedDoctor!.id.toString(),
       idPacient: loggedUser!.id.toString(),
       moment: transformDateTime(selectedDate, selectedTime),
@@ -71,6 +71,10 @@ export default function SchedulePage() {
   function transformDateTime(data: string, hora: string) {
     const dateTimeString = `${data}T${hora}:00`;
     return dateTimeString;
+  }
+
+  if (!loggedUser) {
+    return null;
   }
 
   return (

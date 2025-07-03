@@ -14,7 +14,6 @@ export default function MultiStepForm() {
     handlePrevStep,
     createUser,
     handleInputChange,
-    handleCheckboxChange,
     handleConfirmation,
     handleSelectChange,
   } = useMultiStepForm();

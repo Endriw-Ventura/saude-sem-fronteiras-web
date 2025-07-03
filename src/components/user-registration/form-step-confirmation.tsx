@@ -28,7 +28,7 @@ export default function UserFormConfirmation({
       <p>Street Name: {user.address.streetName}</p>
       <p>Number: {user.address.number}</p>
       <p>Zipcode: {user.address.zipCode}</p>
-      <p>Mother's name: {user.userInfo.motherName}</p>
+      <p>Mothers name: {user.userInfo.motherName}</p>
       <p>Blood Type: {user.userInfo.bloodType}</p>
       <p>Previous Surgeries: {user.userInfo.cirurgies}</p>
       <p>Medical Condition: {user.userInfo.medicalCondition}</p>

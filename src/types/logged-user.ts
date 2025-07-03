@@ -1,5 +1,5 @@
 export interface LoggedUser {
-  id: Number;
+  id: number;
   email: string;
   name: string;
   role: string;

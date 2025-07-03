@@ -1,9 +1,8 @@
 import axios from "axios";
-import { NEXT_PUBLIC_API_URL } from "@/../env.dev";
 import { parseCookies } from "nookies";
 
 export const api = axios.create({
-  baseURL: NEXT_PUBLIC_API_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     "Content-Type": "application/json",
   },

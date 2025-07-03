@@ -10,7 +10,6 @@ import {
   useState,
 } from "react";
 import { userService } from "@/service/service-user";
-import { useRouter } from "next/navigation";
 
 interface ProviderProps {
   children: ReactNode;
@@ -26,7 +25,6 @@ export const UserContext = createContext<UserContextProps | null>(null);
 export const UserProvider = ({ children }: ProviderProps) => {
   const [loggedUser, setLoggedUser] = useState<LoggedUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
 
   useEffect(() => {
     async function loadUser() {
@@ -35,7 +33,7 @@ export const UserProvider = ({ children }: ProviderProps) => {
         if (userInfo) {
           setLoggedUser(userInfo);
         }
-      } catch (error) {
+      } catch {
         console.log("Usuário não autenticado");
       } finally {
         setIsLoading(false);

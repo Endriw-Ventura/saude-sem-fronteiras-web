@@ -6,8 +6,8 @@ export interface Doctor {
   email: string;
   initialHour: string;
   finalHour: string;
-  specialtyId: Number;
-  price: Number;
+  specialtyId: number;
+  price: number;
   WeekdaysDTO: {
     sunday: boolean;
     monday: boolean;
@@ -20,11 +20,11 @@ export interface Doctor {
 }
 
 export interface SimpleDoctor {
-  id: Number;
+  id: number;
   name: string;
   surname: string;
   email: string;
-  price: Number;
+  price: number;
 }
 
 export const defaultDoctor: Doctor = {

@@ -6,7 +6,7 @@ async function sendEmail(address: string) {
     const { data } = await api.post(`/Email`, address);
     toast.success(`Email sent to: ${address}`);
     return data;
-  } catch (error) {
+  } catch {
     toast.error("Couldnt send the email!");
     throw new Error("Something went wrong");
   }

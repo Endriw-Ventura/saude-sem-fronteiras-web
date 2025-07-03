@@ -1,4 +1,3 @@
-import { SimpleDoctor } from "./doctor";
 import { SimpleUser } from "./user";
 
 export interface Exam {
@@ -8,13 +7,13 @@ export interface Exam {
 }
 
 export interface SimpleExam {
-  idPacient: Number;
+  idPacient: number;
   examName: string;
   moment: string;
 }
 
 export interface ExamList {
-  id: Number;
+  id: number;
   examName: string;
   pacient: SimpleUser;
   moment: string;

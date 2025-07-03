@@ -1,6 +1,6 @@
 "use client";
 
-import Logo from "@/components/ui/logo";
+import Logo from "@/components/ui/Logo";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/hooks/use-user";
 import { loginService } from "@/service/service-login";
@@ -18,7 +18,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async () => {
     const data = await loginService.doLogin(email, password);
     const parsedData: LoggedUser = { ...data };
     setLoggedUser(parsedData);

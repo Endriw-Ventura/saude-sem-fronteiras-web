@@ -1,24 +1,15 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useUser } from "@/hooks/use-user";
 import CustomMain from "@/components/ui/custom-main";
 import CustomButton from "@/components/ui/custom-button";
 import { examService } from "@/service/service-exam";
-import { ConsultList } from "@/types/consult";
 import { useEffect, useState } from "react";
 import { ExamList } from "@/types/exam";
 
 export default function ExamsPage() {
-  const router = useRouter();
   const { loggedUser } = useUser();
   const [exams, setExams] = useState<ExamList[]>([]);
-
-  if (!loggedUser) {
-    router.push("/");
-  }
-
-  const { role, id } = loggedUser!;
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -30,9 +21,9 @@ export default function ExamsPage() {
       }
     };
     fetchItems();
-  }, []);
+  });
 
-  const handleRemover = async (id: Number) => {
+  const handleRemover = async (id: number) => {
     try {
       await examService.deleteExam(id);
       setExams((prev) => prev.filter((exam) => exam.id !== id));
@@ -40,6 +31,10 @@ export default function ExamsPage() {
       console.error("Something went wrong:", error);
     }
   };
+  if (!loggedUser) {
+    return null;
+  }
+  const { role, id } = loggedUser!;
 
   return (
     <CustomMain>
@@ -85,7 +80,7 @@ export default function ExamsPage() {
           );
         })
       ) : (
-        <p>No events Scheduled</p>
+        <p>No exams Scheduled</p>
       )}
     </CustomMain>
   );

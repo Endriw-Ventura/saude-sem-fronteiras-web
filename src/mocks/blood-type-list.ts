@@ -1,3 +1,5 @@
+import { SelectType } from "@/types/select-type";
+
 export const bloodTypeList: SelectType[] = [
   {
     id: 0,

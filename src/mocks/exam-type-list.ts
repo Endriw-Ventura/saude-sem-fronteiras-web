@@ -1,3 +1,5 @@
+import { SelectType } from "@/types/select-type";
+
 export const examTypes: SelectType[] = [
   { id: 0, name: "Blood Test" },
   { id: 1, name: "X-Ray" },

@@ -1,3 +1,5 @@
+import { SelectType } from "@/types/select-type";
+
 export const medicalConditionList: SelectType[] = [
   {
     id: 0,

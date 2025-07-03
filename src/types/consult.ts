@@ -15,7 +15,7 @@ export interface SimpleConsult {
 }
 
 export interface ConsultList {
-  id: Number;
+  id: number;
   pacient: SimpleUser;
   doctor: SimpleDoctor;
   moment: string;

@@ -10,6 +10,7 @@ import { examService } from "@/service/service-exam";
 import { examTypes } from "@/mocks/exam-type-list";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { SelectType } from "@/types/select-type";
 
 export default function SchedulePage() {
   const { loggedUser } = useUser();
@@ -20,8 +21,8 @@ export default function SchedulePage() {
   const [pacients, setPacients] = useState<SelectType[]>([]);
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    const response = await examService.createExam({
+  const handleSubmit = async () => {
+    await examService.createExam({
       idPacient: selectedUser,
       examName: examTypes.find((exam) => exam.id === selectedExam)!.name,
       moment: transformDateTime(selectedDate, selectedTime),
@@ -48,7 +49,7 @@ export default function SchedulePage() {
           name: user.name,
         }));
         setPacients(userList);
-        setSelectedUser(Number(userList[0].id));
+        if (userList.length > 0) setSelectedUser(Number(userList[0].id));
       } catch (error) {
         console.error("Failed to load users for exam", error);
       }
@@ -57,6 +58,9 @@ export default function SchedulePage() {
     fetchPacients();
   }, [loggedUser]);
 
+  if (!loggedUser) {
+    return null;
+  }
   return (
     <CustomMain>
       {pacients.length > 0 ? (

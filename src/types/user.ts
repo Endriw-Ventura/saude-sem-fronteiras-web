@@ -12,7 +12,7 @@ export interface User {
 }
 
 export interface SimpleUser {
-  id: Number;
+  id: number;
   name: string;
   surname: string;
   cpf: string;

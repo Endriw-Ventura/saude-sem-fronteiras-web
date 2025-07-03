@@ -6,14 +6,14 @@ async function getDoctors() {
   try {
     const { data } = await api.get(`/Doctor`);
     return data;
-  } catch (error) {
+  } catch {
     toast.error("Couldnt fetch doctors!");
     throw new Error("Something went wrong");
   }
 }
 
 async function getAvailableDoctors(
-  idSpecialty: Number,
+  idSpecialty: number,
   moment: string
 ): Promise<SimpleDoctor[]> {
   try {
@@ -21,17 +21,17 @@ async function getAvailableDoctors(
       `/Doctor/specialty?idSpecialty=${idSpecialty}&moment=${moment}`
     );
     return data;
-  } catch (error) {
+  } catch {
     toast.error("Couldnt fetch available doctors!");
     throw new Error("Something went wrong");
   }
 }
 
-async function getDoctor(id: Number) {
+async function getDoctor(id: number) {
   try {
     const { data } = await api.get(`/Doctor/${id}`);
     return data;
-  } catch (error) {
+  } catch {
     toast.error("Couldnt fetch doctor!");
     throw new Error("Something went wrong");
   }
@@ -39,29 +39,29 @@ async function getDoctor(id: Number) {
 
 async function createDoctor(doctor: Doctor) {
   try {
-    const response = await api.post("/Doctor/", doctor);
+    await api.post("/Doctor/", doctor);
     toast.success("Doctor created succesfully!");
-  } catch (error) {
+  } catch {
     toast.error("Couldnt create doctor!");
     throw new Error("Something went wrong");
   }
 }
 
-async function deleteDoctor(id: Number) {
+async function deleteDoctor(id: number) {
   try {
-    const response = await api.delete(`/Doctor/${id}`);
+    await api.delete(`/Doctor/${id}`);
     toast.success("Doctor deleted succesfully!");
-  } catch (error) {
+  } catch {
     toast.error("Couldnt delete doctor!");
     throw new Error("Something went wrong");
   }
 }
 
-async function editDoctor(id: Number, doctor: Doctor) {
+async function editDoctor(id: number, doctor: Doctor) {
   try {
-    const response = await api.put(`/Doctor/speciality/${id}`, doctor);
+    await api.put(`/Doctor/speciality/${id}`, doctor);
     toast.success("Doctor updated succesfully!");
-  } catch (error) {
+  } catch {
     toast.error("Couldnt update doctor!");
     throw new Error("Something went wrong");
   }

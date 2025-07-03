@@ -7,37 +7,37 @@ async function getExams(): Promise<Exam[]> {
   try {
     const { data } = await api.get(`/Exam`);
     return data;
-  } catch (error) {
+  } catch {
     toast.error("Couldnt fetch exams!");
     throw new Error("Something went wrong");
   }
 }
 
-async function getUserExams(id: Number, role: string): Promise<ExamList[]> {
+async function getUserExams(id: number, role: string): Promise<ExamList[]> {
   try {
     const { data } = await api.get(`/Exam/${role}/${id}`);
     return data;
-  } catch (error) {
+  } catch {
     toast.error("Couldnt fetch exams!");
     throw new Error("Something went wrong");
   }
 }
 
-async function getUsers(id: Number, role: string): Promise<SimpleUser[]> {
+async function getUsers(id: number, role: string): Promise<SimpleUser[]> {
   try {
     const { data } = await api.get(`/Exam/user/${role}/${id}`);
     return data;
-  } catch (error) {
+  } catch {
     toast.error("Couldnt fetch exams!");
     throw new Error("Something went wrong");
   }
 }
 
-async function getExam(id: Number): Promise<Exam> {
+async function getExam(id: number): Promise<Exam> {
   try {
     const { data } = await api.get(`/Exam/${id}`);
     return data;
-  } catch (error) {
+  } catch {
     toast.error("Couldnt fetch exam!");
     throw new Error("Something went wrong");
   }
@@ -45,30 +45,29 @@ async function getExam(id: Number): Promise<Exam> {
 
 async function createExam(exam: SimpleExam): Promise<void> {
   try {
-    const response = await api.post("/Exam/", exam);
+    await api.post("/Exam/", exam);
     toast.success("Exam created successfully!");
-  } catch (error) {
+  } catch {
     toast.error("Couldnt create exam!");
-    console.log(error);
     throw new Error("Something went wrong");
   }
 }
 
-async function deleteExam(id: Number): Promise<void> {
+async function deleteExam(id: number): Promise<void> {
   try {
-    const response = await api.delete(`/Exam/${id}`);
+    await api.delete(`/Exam/${id}`);
     toast.success("Exam deleted successfully!");
-  } catch (error) {
+  } catch {
     toast.error("Couldnt delete exam!");
     throw new Error("Something went wrong");
   }
 }
 
-async function editExam(id: Number, exam: Exam): Promise<void> {
+async function editExam(id: number, exam: Exam): Promise<void> {
   try {
-    const response = await api.put(`/Exam/${id}`, exam);
+    await api.put(`/Exam/${id}`, exam);
     toast.success("Exam updated successfully!");
-  } catch (error) {
+  } catch {
     toast.error("Couldnt edit exam!");
     throw new Error("Something went wrong");
   }

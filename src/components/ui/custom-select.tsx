@@ -1,5 +1,6 @@
 "use client";
 
+import { SelectType } from "@/types/select-type";
 import CustomLabel from "./custom-label";
 
 type CustomSelectProps = {

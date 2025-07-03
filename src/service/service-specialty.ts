@@ -5,7 +5,7 @@ async function getSpecialties() {
   try {
     const { data } = await api.get("/Specialty/");
     return data;
-  } catch (error) {
+  } catch {
     toast.error("Couldnt fetch specialties");
     throw new Error("Something went wrong");
   }

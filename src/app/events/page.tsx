@@ -10,7 +10,15 @@ import { useEffect, useState } from "react";
 export default function EventsPage() {
   const { loggedUser } = useUser();
   const [consults, setConsults] = useState<ConsultList[]>([]);
-  const { role } = loggedUser!;
+
+  const handleRemover = async (id: number) => {
+    try {
+      await consultService.deleteConsult(id);
+      setConsults((prev) => prev.filter((consult) => consult.id !== id));
+    } catch (error) {
+      console.error("Erro ao deletar consulta:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -25,16 +33,13 @@ export default function EventsPage() {
       }
     };
     fetchItems();
-  }, []);
+  });
 
-  const handleRemover = async (id: Number) => {
-    try {
-      await consultService.deleteConsult(id);
-      setConsults((prev) => prev.filter((consult) => consult.id !== id));
-    } catch (error) {
-      console.error("Erro ao deletar consulta:", error);
-    }
-  };
+  if (!loggedUser) {
+    return null;
+  }
+
+  const { role } = loggedUser!;
 
   return (
     <CustomMain>
