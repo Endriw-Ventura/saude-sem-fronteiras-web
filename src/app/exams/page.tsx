@@ -13,15 +13,21 @@ export default function ExamsPage() {
 
   useEffect(() => {
     const fetchItems = async () => {
+      if (!loggedUser) return;
+
       try {
-        const response = await examService.getUserExams(id, role);
+        const response = await examService.getUserExams(
+          loggedUser.id,
+          loggedUser.role
+        );
         setExams(response);
       } catch (error) {
         console.error("Erro ao buscar os itens:", error);
       }
     };
+
     fetchItems();
-  });
+  }, [loggedUser]);
 
   const handleRemover = async (id: number) => {
     try {
@@ -31,16 +37,11 @@ export default function ExamsPage() {
       console.error("Something went wrong:", error);
     }
   };
-  if (!loggedUser) {
-    return null;
-  }
-  const { role, id } = loggedUser!;
 
+  // ✅ Fallback antes de renderizar
   if (!loggedUser) {
-    return null;
+    return <p>Loading...</p>;
   }
-
-  const { role, id } = loggedUser!;
 
   return (
     <CustomMain>
@@ -48,9 +49,7 @@ export default function ExamsPage() {
       {exams.length > 0 ? (
         exams.map((exam: ExamList) => {
           const { pacient, moment, id, examName } = exam;
-          const dateTime = moment.split("T");
-          const date = dateTime[0];
-          const time = dateTime[1];
+          const [date, time] = moment.split("T");
           return (
             <div key={id.toString()} className="p-[8px] w-full">
               <table
@@ -61,7 +60,7 @@ export default function ExamsPage() {
               >
                 <thead className="text-center">
                   <tr>
-                    <th className="w-1/6">Patients Name</th>
+                    <th className="w-1/6">Patient Name</th>
                     <th className="w-1/6">Exam Name</th>
                     <th className="w-1/6">Date</th>
                     <th className="w-1/6">Time</th>
@@ -69,12 +68,12 @@ export default function ExamsPage() {
                   </tr>
                 </thead>
                 <tbody className="text-center">
-                  <tr key={id.toString()}>
-                    <td className="w-1/6">{`${pacient.name} ${pacient.surname}`}</td>
-                    <td className="w-1/6">{`${examName}`}</td>
-                    <td className="w-1/6">{date}</td>
-                    <td className="w-1/6">{time}</td>
-                    <td className="w-1/6">
+                  <tr>
+                    <td>{`${pacient.name} ${pacient.surname}`}</td>
+                    <td>{examName}</td>
+                    <td>{date}</td>
+                    <td>{time}</td>
+                    <td>
                       <CustomButton clickHandler={() => handleRemover(id)}>
                         Cancel
                       </CustomButton>
@@ -86,7 +85,7 @@ export default function ExamsPage() {
           );
         })
       ) : (
-        <p>No exams Scheduled</p>
+        <p>No exams scheduled</p>
       )}
     </CustomMain>
   );
