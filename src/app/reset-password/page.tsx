@@ -31,7 +31,7 @@ export default function ResetPassword() {
           toast.success("Senha redefinida com sucesso!");
           router.push("/");
         }
-      } catch (error) {
+      } catch {
         toast.error("Erro ao redefinir a senha.");
       }
     } else {
