@@ -6,7 +6,7 @@ export default function Logo() {
     <div className="bg-black p-[30px] mb-[30px] rounded-md">
       <Image
         aria-hidden
-        src="/logo.jpg"
+        src="/images/logo.jpg"
         alt="Logo Icon"
         className="w-full h-auto"
         width={1200}
