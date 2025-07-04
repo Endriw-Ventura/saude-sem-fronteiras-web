@@ -3,7 +3,7 @@ import { memoryStore } from "@/mocks/store/memoryStore";
 import { getPopulatedExams } from "@/mocks/store/getPopulated";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { role, id } = req.query;
+  const { id } = req.query;
   if (req.method === "GET") {
     const events = getPopulatedExams();
     const filtered = events.filter(

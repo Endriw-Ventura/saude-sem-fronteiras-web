@@ -21,10 +21,6 @@ export default function SchedulePage() {
   const [selectedUser, setSelectedUser] = useState(0);
   const [pacients, setPacients] = useState<SelectType[]>([]);
 
-  if (!loggedUser) {
-    return null;
-  }
-
   const handleSubmit = async () => {
     await examService.createExam({
       idPacient: selectedUser,
@@ -65,6 +61,7 @@ export default function SchedulePage() {
   if (!loggedUser) {
     return null;
   }
+
   return (
     <CustomMain>
       {pacients.length > 0 ? (

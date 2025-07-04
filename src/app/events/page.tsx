@@ -8,13 +8,26 @@ import { ConsultList } from "@/types/consult";
 import { useEffect, useState } from "react";
 
 export default function EventsPage() {
-  const { loggedUser } = useUser();
+  const { loggedUser } = useUser(); // ✅ sempre no topo
+  const [consults, setConsults] = useState<ConsultList[]>([]); // ✅ sempre no topo
 
-  if (!loggedUser) {
-    return null;
-  }
+  useEffect(() => {
+    if (!loggedUser) return;
 
-  const [consults, setConsults] = useState<ConsultList[]>([]);
+    const fetchItems = async () => {
+      try {
+        const response = await consultService.getUserConsults(
+          loggedUser.id,
+          loggedUser.role
+        );
+        setConsults(response);
+      } catch (error) {
+        console.error("Erro ao buscar os itens:", error);
+      }
+    };
+
+    fetchItems();
+  }, [loggedUser]);
 
   const handleRemover = async (id: number) => {
     try {
@@ -25,26 +38,9 @@ export default function EventsPage() {
     }
   };
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const response = await consultService.getUserConsults(
-          loggedUser!.id,
-          role
-        );
-        setConsults(response);
-      } catch (error) {
-        console.error("Erro ao buscar os itens:", error);
-      }
-    };
-    fetchItems();
-  });
-
   if (!loggedUser) {
     return null;
   }
-
-  const { role } = loggedUser!;
 
   return (
     <CustomMain>
@@ -52,9 +48,8 @@ export default function EventsPage() {
       {consults.length > 0 ? (
         consults.map((consult: ConsultList) => {
           const { pacient, doctor, moment, id } = consult;
-          const dateTime = moment.split("T");
-          const date = dateTime[0];
-          const time = dateTime[1];
+          const [date, time] = moment.split("T");
+
           return (
             <div key={id.toString()} className="p-[8px] w-full">
               <table
@@ -74,13 +69,13 @@ export default function EventsPage() {
                   </tr>
                 </thead>
                 <tbody className="text-center">
-                  <tr key={id.toString()}>
-                    <td className="w-1/6">{`${pacient.name} ${pacient.surname}`}</td>
-                    <td className="w-1/6">{`${doctor.name} ${doctor.surname}`}</td>
-                    <td className="w-1/6">{date}</td>
-                    <td className="w-1/6">{time}</td>
-                    <td className="w-1/6">{`R$ ${doctor.price}`}</td>
-                    <td className="w-1/6">
+                  <tr>
+                    <td>{`${pacient.name} ${pacient.surname}`}</td>
+                    <td>{`${doctor.name} ${doctor.surname}`}</td>
+                    <td>{date}</td>
+                    <td>{time}</td>
+                    <td>{`R$ ${doctor.price}`}</td>
+                    <td>
                       <CustomButton clickHandler={() => handleRemover(id)}>
                         Cancel
                       </CustomButton>
