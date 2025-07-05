@@ -5,11 +5,8 @@ import { getPopulatedExams } from "@/mocks/store/getPopulated";
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
   if (req.method === "GET") {
-    const events = getPopulatedExams();
-    const filtered = events.filter(
-      (event: any) => event.pacient?.id === Number(id)
-    );
-    return res.status(200).json(filtered);
+    const exams = getPopulatedExams(Number(id));
+    return res.status(200).json(exams);
   }
 
   if (req.method === "POST") {
