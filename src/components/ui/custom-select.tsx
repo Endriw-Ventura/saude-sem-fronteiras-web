@@ -27,8 +27,8 @@ export default function CustomSelect({
         onChange={changeHandler}
         className="p-2 rounded bg-stone-500 border border-white text-stone-300"
       >
-        {itemList.map((item, index) => (
-          <option key={item.id.toString()} value={index}>
+        {itemList.map((item) => (
+          <option key={item.id.toString()} value={item.id}>
             {item.name}
           </option>
         ))}

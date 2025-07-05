@@ -21,8 +21,7 @@ export default function SchedulePage() {
   const [selectedTime, setSelectedTime] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const router = useRouter();
-  const [selectedSpeciality, setSelectedSpeciality] =
-    useState<Specialty | null>(null);
+  const [selectedSpeciality, setSelectedSpeciality] = useState<number>(0);
   const [selectedDoctor, setSelectedDoctor] = useState<SimpleDoctor | null>(
     null
   );
@@ -45,7 +44,7 @@ export default function SchedulePage() {
       if (!selectedSpeciality || !selectedDate || !selectedTime) return;
       try {
         const response = await doctorService.getAvailableDoctors(
-          selectedSpeciality.id,
+          selectedSpeciality,
           transformDateTime(selectedDate, selectedTime)
         );
         setDoctors(response);
@@ -83,10 +82,8 @@ export default function SchedulePage() {
           name="specialty"
           label="Specialty"
           itemList={specialities}
-          value={specialities.findIndex((s) => s.id === selectedSpeciality?.id)}
-          changeHandler={(e) =>
-            setSelectedSpeciality(specialities[Number(e.target.value)])
-          }
+          value={selectedSpeciality}
+          changeHandler={(e) => setSelectedSpeciality(Number(e.target.value))}
         />
 
         <CustomInput

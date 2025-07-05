@@ -10,18 +10,33 @@ export function getPopulatedEvents() {
   });
 }
 
-export function getPopulatedExams(id: number) {
-  const eventsFiltered = memoryStore.events.filter((event: any) => {
-    return event.doctorId == id;
-  });
-
-  const pacientIds = eventsFiltered.map((event: any) => event.pacientId);
-  const exams = memoryStore.exams
-    .filter((exam: any) => pacientIds.includes(exam.userId))
-    .map((exam: any) => {
-      const pacient = memoryStore.users.find((u: any) => u.id === exam.userId);
-      return { ...exam, pacient };
+export function getPopulatedExams(
+  id: number,
+  role: string | string[] | undefined
+) {
+  if (role == "doctor") {
+    const eventsFiltered = memoryStore.events.filter((event: any) => {
+      return event.doctorId == id;
     });
 
-  return exams;
+    const pacientIds = eventsFiltered.map((event: any) => event.pacientId);
+    const exams = memoryStore.exams
+      .filter((exam: any) => pacientIds.includes(exam.pacientId))
+      .map((exam: any) => {
+        const pacient = memoryStore.users.find(
+          (u: any) => u.id === exam.pacientId
+        );
+        return { ...exam, pacient };
+      });
+
+    return exams;
+  }
+  return memoryStore.exams
+    .filter((exam: any) => exam.pacientId == id)
+    .map((exam: any) => {
+      const pacient = memoryStore.users.find(
+        (u: any) => u.id === exam.pacientId
+      );
+      return { ...exam, pacient };
+    });
 }

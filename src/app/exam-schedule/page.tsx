@@ -44,12 +44,12 @@ export default function SchedulePage() {
           loggedUser.id,
           loggedUser.role
         );
-        const userList: SelectType[] = users.map((user) => ({
-          id: user.pacient.id,
-          name: user.pacient.name,
+        const userList: SelectType[] = users.map((exam) => ({
+          id: exam.pacient.id,
+          name: exam.pacient.name,
         }));
         setPacients(userList);
-        if (userList.length > 0) setSelectedUser(Number(userList[0].id));
+        if (userList.length > 0) setSelectedUser(userList[0].id);
       } catch (error) {
         console.error("Failed to load users for exam", error);
       }

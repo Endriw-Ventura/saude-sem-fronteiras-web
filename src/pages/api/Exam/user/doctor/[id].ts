@@ -11,13 +11,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     );
     const pacientIds = events.map((e: any) => e.pacientId);
     const exams = memoryStore.exams.filter((exam: any) =>
-      pacientIds.includes(exam.userId)
+      pacientIds.includes(exam.pacientId)
     );
 
     return res.status(200).json(
       exams.map((exam: any) => {
         const pacient = memoryStore.users.find(
-          (u: any) => u.id === exam.userId
+          (u: any) => u.id === exam.pacientId
         );
         return { ...exam, pacient };
       })
