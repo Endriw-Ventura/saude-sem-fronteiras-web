@@ -1,6 +1,5 @@
 import { api } from "./api";
 import { Exam, ExamList, SimpleExam } from "@/types/exam";
-import { SimpleUser } from "@/types/user";
 import { toast } from "react-toastify";
 
 async function getExams(): Promise<Exam[]> {
@@ -23,7 +22,7 @@ async function getUserExams(id: number, role: string): Promise<ExamList[]> {
   }
 }
 
-async function getUsers(id: number, role: string): Promise<SimpleUser[]> {
+async function getUsers(id: number, role: string): Promise<ExamList[]> {
   try {
     const { data } = await api.get(`/Exam/user/${role}/${id}`);
     return data;

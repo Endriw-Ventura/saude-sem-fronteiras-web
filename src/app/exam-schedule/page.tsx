@@ -45,8 +45,8 @@ export default function SchedulePage() {
           loggedUser.role
         );
         const userList: SelectType[] = users.map((user) => ({
-          id: user.id,
-          name: user.name,
+          id: user.pacient.id,
+          name: user.pacient.name,
         }));
         setPacients(userList);
         if (userList.length > 0) setSelectedUser(Number(userList[0].id));
