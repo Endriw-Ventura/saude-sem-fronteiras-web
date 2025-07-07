@@ -1,6 +1,6 @@
 "use client";
 
-import { LoggedUser } from "@/types/logged-user";
+//import { LoggedUser } from "@/types/logged-user";
 import {
   createContext,
   Dispatch,
@@ -16,14 +16,14 @@ interface ProviderProps {
 }
 
 interface UserContextProps {
-  loggedUser: LoggedUser | null;
-  setLoggedUser: Dispatch<SetStateAction<LoggedUser | null>>;
+  loggedUser: any | null;
+  setLoggedUser: Dispatch<SetStateAction<any | null>>;
 }
 
 export const UserContext = createContext<UserContextProps | null>(null);
 
 export const UserProvider = ({ children }: ProviderProps) => {
-  const [loggedUser, setLoggedUser] = useState<LoggedUser | null>(null);
+  const [loggedUser, setLoggedUser] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     async function loadUser() {

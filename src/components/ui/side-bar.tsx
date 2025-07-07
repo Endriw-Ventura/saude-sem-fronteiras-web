@@ -16,6 +16,8 @@ export default function Sidebar() {
     { href: "/exams", label: "Exams", roles: ["user", "doctor"] },
     { href: "/exam-schedule", label: "Schedule Exam", roles: ["doctor"] },
     { href: "/schedule", label: "Schedule Event", roles: ["user"] },
+    { href: "/profile", label: "Profile", roles: ["user", "doctor"] },
+    { href: "/edit-profile", label: "Edit Profile", roles: ["user", "doctor"] },
   ];
 
   const handleLogout = async () => {
