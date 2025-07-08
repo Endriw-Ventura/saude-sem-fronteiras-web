@@ -2,14 +2,15 @@
 
 import CustomButton from "@/components/ui/custom-button";
 import CustomMain from "@/components/ui/custom-main";
+import NavButton from "@/components/ui/nav-button";
 import { useUser } from "@/hooks/use-user";
 import { consultService } from "@/service/service-consult";
 import { ConsultList } from "@/types/consult";
 import { useEffect, useState } from "react";
 
 export default function EventsPage() {
-  const { loggedUser } = useUser(); // ✅ sempre no topo
-  const [consults, setConsults] = useState<ConsultList[]>([]); // ✅ sempre no topo
+  const { loggedUser } = useUser();
+  const [consults, setConsults] = useState<ConsultList[]>([]);
 
   useEffect(() => {
     if (!loggedUser) return;
@@ -75,10 +76,15 @@ export default function EventsPage() {
                     <td>{date}</td>
                     <td>{time}</td>
                     <td>{`R$ ${doctor.price}`}</td>
-                    <td>
+                    <td className="flex justify-between flex-row items-center">
                       <CustomButton clickHandler={() => handleRemover(id)}>
                         Cancel
                       </CustomButton>
+                      <div className="mx-2" />
+                      <NavButton
+                        route={`/certificate`}
+                        buttonText={"Certificate"}
+                      />
                     </td>
                   </tr>
                 </tbody>
