@@ -5,10 +5,12 @@ import CustomButton from "@/components/ui/custom-button";
 import { useUser } from "@/hooks/use-user";
 import { useState } from "react";
 import TextBlock from "@/components/ui/text-block";
+import { useRouter } from "next/navigation";
 
 export default function Certificate() {
   const { loggedUser } = useUser();
   const [downloading, setDownloading] = useState(false);
+  const router = useRouter();
 
   if (!loggedUser) return <p>Carregando...</p>;
 
@@ -48,6 +50,7 @@ CRM: 123456
       <CustomButton clickHandler={handleDownload}>
         {downloading ? "Downloading..." : "Download Certificate"}
       </CustomButton>
+      <CustomButton clickHandler={() => router.back()}>Back</CustomButton>
     </CustomMain>
   );
 }

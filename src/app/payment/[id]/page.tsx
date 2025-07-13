@@ -28,7 +28,7 @@ export default function Payment() {
         );
         setConsult(consult);
         const paymentText = `
-Payment Guide - Consultation
+Payment Guide - Event
 
 Consultation ID: ${consult.id}
 Patient: ${patient.name} ${patient.surname}
@@ -48,7 +48,7 @@ This is an automatically generated payment receipt (mock).
   }, []);
 
   function handleDownload() {
-    if (!consult) return;
+    if (!consult) return <p>Event not found...</p>;
     setDownloading(true);
     const blob = new Blob([text], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
