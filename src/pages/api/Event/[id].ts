@@ -10,11 +10,23 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     );
 
     if (eventIndex === -1) {
-      return res.status(404).json({ message: "Evento não encontrado." });
+      return res.status(404).json({ message: "Event not found." });
     }
 
     const removedEvent = memoryStore.events.splice(eventIndex, 1)[0];
     return res.status(200).json(removedEvent);
+  }
+
+  if (req.method === "GET") {
+    const event = memoryStore.events.find(
+      (event: any) => event.id === Number(id)
+    );
+
+    if (!event) {
+      return res.status(404).json({ message: "Event not found." });
+    }
+
+    return res.status(200).json(event);
   }
 
   res.status(405).end();

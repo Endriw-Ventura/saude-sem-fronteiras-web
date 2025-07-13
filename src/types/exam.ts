@@ -1,13 +1,13 @@
 import { SimpleUser } from "./user";
 
 export interface Exam {
-  pacient: SimpleUser;
+  patient: SimpleUser;
   time: string;
   date: string;
 }
 
 export interface SimpleExam {
-  idPacient: number;
+  idPatient: number;
   examName: string;
   moment: string;
 }
@@ -15,6 +15,6 @@ export interface SimpleExam {
 export interface ExamList {
   id: number;
   examName: string;
-  pacient: SimpleUser;
+  patient: SimpleUser;
   moment: string;
 }

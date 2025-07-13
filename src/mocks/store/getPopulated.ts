@@ -2,11 +2,11 @@ import { memoryStore } from "./memoryStore";
 
 export function getPopulatedEvents() {
   return memoryStore.events.map((event: any) => {
-    const pacient = memoryStore.users.find(
-      (u: any) => u.id === event.pacientId
+    const patient = memoryStore.users.find(
+      (u: any) => u.id === event.patientId
     );
     const doctor = memoryStore.users.find((u: any) => u.id === event.doctorId);
-    return { ...event, pacient, doctor };
+    return { ...event, patient, doctor };
   });
 }
 
@@ -19,24 +19,24 @@ export function getPopulatedExams(
       return event.doctorId == id;
     });
 
-    const pacientIds = eventsFiltered.map((event: any) => event.pacientId);
+    const patientIds = eventsFiltered.map((event: any) => event.patientId);
     const exams = memoryStore.exams
-      .filter((exam: any) => pacientIds.includes(exam.pacientId))
+      .filter((exam: any) => patientIds.includes(exam.patientId))
       .map((exam: any) => {
-        const pacient = memoryStore.users.find(
-          (u: any) => u.id === exam.pacientId
+        const patient = memoryStore.users.find(
+          (u: any) => u.id === exam.patientId
         );
-        return { ...exam, pacient };
+        return { ...exam, patient };
       });
 
     return exams;
   }
   return memoryStore.exams
-    .filter((exam: any) => exam.pacientId == id)
+    .filter((exam: any) => exam.patientId == id)
     .map((exam: any) => {
-      const pacient = memoryStore.users.find(
-        (u: any) => u.id === exam.pacientId
+      const patient = memoryStore.users.find(
+        (u: any) => u.id === exam.patientId
       );
-      return { ...exam, pacient };
+      return { ...exam, patient };
     });
 }

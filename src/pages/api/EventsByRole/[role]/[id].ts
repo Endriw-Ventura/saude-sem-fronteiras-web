@@ -8,7 +8,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const filtered = events.filter((event: any) =>
       role === "doctor"
         ? event.doctor?.id === Number(id)
-        : event.pacient?.id === Number(id)
+        : event.patient?.id === Number(id)
     );
     return res.status(200).json(filtered);
   }

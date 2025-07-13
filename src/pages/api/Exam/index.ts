@@ -3,18 +3,18 @@ import { memoryStore } from "@/mocks/store/memoryStore";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
-    const { idPacient, moment, examName } = req.body;
-    const pacientId = Number(idPacient);
-    const pacient = memoryStore.users.find((u: any) => u.id === pacientId);
+    const { idPatient, moment, examName } = req.body;
+    const patientId = Number(idPatient);
+    const patient = memoryStore.users.find((u: any) => u.id === patientId);
 
-    if (!pacient) return res.status(400).json({ message: "Pacient not found" });
+    if (!patient) return res.status(400).json({ message: "Patient not found" });
 
     const newEvent = {
       id: memoryStore.exams.length + 1,
       examName,
-      pacientId,
+      patientId,
       moment,
-      pacient,
+      patient,
     };
 
     memoryStore.exams.push(newEvent);

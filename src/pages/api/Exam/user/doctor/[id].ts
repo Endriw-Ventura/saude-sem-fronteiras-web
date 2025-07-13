@@ -16,10 +16,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     return res.status(200).json(
       exams.map((exam: any) => {
-        const pacient = memoryStore.users.find(
-          (u: any) => u.id === exam.pacientId
+        const patient = memoryStore.users.find(
+          (u: any) => u.id === exam.patientId
         );
-        return { ...exam, pacient };
+        return { ...exam, patient };
       })
     );
   }

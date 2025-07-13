@@ -19,11 +19,11 @@ export default function SchedulePage() {
   const [selectedTime, setSelectedTime] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedUser, setSelectedUser] = useState(0);
-  const [pacients, setPacients] = useState<SelectType[]>([]);
+  const [patients, setPatients] = useState<SelectType[]>([]);
 
   const handleSubmit = async () => {
     await examService.createExam({
-      idPacient: selectedUser,
+      idPatient: selectedUser,
       examName: examTypes.find((exam) => exam.id === selectedExam)!.name,
       moment: transformDateTime(selectedDate, selectedTime),
     });
@@ -36,7 +36,7 @@ export default function SchedulePage() {
   }
 
   useEffect(() => {
-    const fetchPacients = async () => {
+    const fetchPatients = async () => {
       if (!loggedUser) return;
 
       try {
@@ -45,17 +45,17 @@ export default function SchedulePage() {
           loggedUser.role
         );
         const userList: SelectType[] = users.map((exam) => ({
-          id: exam.pacient.id,
-          name: exam.pacient.name,
+          id: exam.patient.id,
+          name: exam.patient.name,
         }));
-        setPacients(userList);
+        setPatients(userList);
         if (userList.length > 0) setSelectedUser(userList[0].id);
       } catch (error) {
         console.error("Failed to load users for exam", error);
       }
     };
 
-    fetchPacients();
+    fetchPatients();
   }, [loggedUser]);
 
   if (!loggedUser) {
@@ -64,12 +64,12 @@ export default function SchedulePage() {
 
   return (
     <CustomMain>
-      {pacients.length > 0 ? (
+      {patients.length > 0 ? (
         <CustomForm submitHandler={handleSubmit}>
           <CustomSelect
             name="user"
-            label="Pacient"
-            itemList={pacients}
+            label="Patient"
+            itemList={patients}
             value={selectedUser}
             changeHandler={(e) => setSelectedUser(parseInt(e.target.value))}
           />
@@ -105,7 +105,7 @@ export default function SchedulePage() {
           <CustomButton type="submit">Schedule</CustomButton>
         </CustomForm>
       ) : (
-        <p>You must have pacients to schedule an exam.</p>
+        <p>You must have patients to schedule an exam.</p>
       )}
     </CustomMain>
   );

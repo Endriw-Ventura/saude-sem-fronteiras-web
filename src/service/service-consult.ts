@@ -25,7 +25,7 @@ async function getUserConsults(
   }
 }
 
-async function getConsult(id: number): Promise<Consult> {
+async function getConsult(id: number): Promise<any> {
   try {
     const { data } = await api.get(`/Event/${id}`);
     return data;

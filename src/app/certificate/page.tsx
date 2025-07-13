@@ -4,6 +4,7 @@ import CustomMain from "@/components/ui/custom-main";
 import CustomButton from "@/components/ui/custom-button";
 import { useUser } from "@/hooks/use-user";
 import { useState } from "react";
+import TextBlock from "@/components/ui/text-block";
 
 export default function Certificate() {
   const { loggedUser } = useUser();
@@ -30,7 +31,6 @@ CRM: 123456
     setDownloading(true);
     const blob = new Blob([certificateText], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
-
     const a = document.createElement("a");
     a.href = url;
     a.download = `atestado-${loggedUser.name}.txt`;
@@ -44,9 +44,7 @@ CRM: 123456
   return (
     <CustomMain>
       <h1 className="text-xl font-bold mb-4">Medical Certificate</h1>
-      <pre className="bg-stone-100 text-black p-4 rounded mb-4 whitespace-pre-wrap">
-        {certificateText}
-      </pre>
+      <TextBlock>{certificateText}</TextBlock>
       <CustomButton clickHandler={handleDownload}>
         {downloading ? "Downloading..." : "Download Certificate"}
       </CustomButton>

@@ -59,7 +59,7 @@ export default function SchedulePage() {
   const handleSubmit = async () => {
     await consultService.createConsult({
       idDoctor: selectedDoctor!.id.toString(),
-      idPacient: loggedUser!.id.toString(),
+      idPatient: loggedUser!.id.toString(),
       moment: transformDateTime(selectedDate, selectedTime),
     });
 

@@ -48,7 +48,7 @@ export default function ExamsPage() {
       <h1>Your Exams</h1>
       {exams.length > 0 ? (
         exams.map((exam: ExamList) => {
-          const { pacient, moment, id, examName } = exam;
+          const { patient, moment, id, examName } = exam;
           const [date, time] = moment.split("T");
           return (
             <div key={id.toString()} className="p-[8px] w-full">
@@ -69,7 +69,7 @@ export default function ExamsPage() {
                 </thead>
                 <tbody className="text-center">
                   <tr>
-                    <td>{`${pacient.name} ${pacient.surname}`}</td>
+                    <td>{`${patient.name} ${patient.surname}`}</td>
                     <td>{examName}</td>
                     <td>{date}</td>
                     <td>{time}</td>

@@ -48,7 +48,7 @@ export default function EventsPage() {
       <h1>Your Events</h1>
       {consults.length > 0 ? (
         consults.map((consult: ConsultList) => {
-          const { pacient, doctor, moment, id } = consult;
+          const { patient, doctor, moment, id } = consult;
           const [date, time] = moment.split("T");
 
           return (
@@ -71,20 +71,29 @@ export default function EventsPage() {
                 </thead>
                 <tbody className="text-center">
                   <tr>
-                    <td>{`${pacient.name} ${pacient.surname}`}</td>
+                    <td>{`${patient.name} ${patient.surname}`}</td>
                     <td>{`${doctor.name} ${doctor.surname}`}</td>
                     <td>{date}</td>
                     <td>{time}</td>
                     <td>{`R$ ${doctor.price}`}</td>
                     <td className="flex justify-between flex-row items-center">
+                      {loggedUser.role === "user" && (
+                        <>
+                          <NavButton
+                            route={`/payment/${id}`}
+                            buttonText={"Receipt"}
+                          />
+                          <div className="mx-2" />
+                          <NavButton
+                            route={`/certificate`}
+                            buttonText={"Certificate"}
+                          />
+                          <div className="mx-2" />
+                        </>
+                      )}
                       <CustomButton clickHandler={() => handleRemover(id)}>
                         Cancel
                       </CustomButton>
-                      <div className="mx-2" />
-                      <NavButton
-                        route={`/certificate`}
-                        buttonText={"Certificate"}
-                      />
                     </td>
                   </tr>
                 </tbody>
